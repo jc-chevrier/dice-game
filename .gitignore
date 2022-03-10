@@ -1,4 +1,4 @@
-/.mvn/
-/.idea/
-/target/
+.mvn
+.idea
+target
 dice-game.iml
