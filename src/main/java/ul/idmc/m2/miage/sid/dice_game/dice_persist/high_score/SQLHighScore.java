@@ -2,6 +2,7 @@ package ul.idmc.m2.miage.sid.dice_game.dice_persist.high_score;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 abstract class SQLHighScore extends DatabaseHighScore<Connection> {
@@ -24,7 +25,7 @@ abstract class SQLHighScore extends DatabaseHighScore<Connection> {
 
             result.close();
             request.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println("Erreur ! Une requête se sélection a échouée : \"" + requestString + "\" !");
             e.printStackTrace();
             System.exit(1);

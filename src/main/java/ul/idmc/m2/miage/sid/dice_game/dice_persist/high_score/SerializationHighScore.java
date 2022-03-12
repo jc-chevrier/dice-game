@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class SerializationHighScore extends HighScore {
     private final static String CONFIGURATION_FILENAME = "./configuration/serialization.properties";
-    protected static Properties CONFIGURATION;
+    private static Properties CONFIGURATION;
 
     static {
         try {
