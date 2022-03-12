@@ -4,11 +4,6 @@ import redis.clients.jedis.Connection;
 
 public class RedisHSEntityManager extends DatabaseHighScore<Connection> {
     @Override
-    protected void loadConfiguration() {
-
-    }
-
-    @Override
     protected void loadConnection() {
 
     }
