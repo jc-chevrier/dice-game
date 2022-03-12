@@ -2,13 +2,12 @@ package ul.idmc.m2.miage.sid.dice_game.dice_persist.high_score;
 
 import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.dice_system.Player;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class HighScore {
+public abstract class HighScore implements Serializable {
     protected List<Score> scores;
-    protected static HighScore highScoreSingleton;
 
     public HighScore() {
         scores = new ArrayList<Score>();

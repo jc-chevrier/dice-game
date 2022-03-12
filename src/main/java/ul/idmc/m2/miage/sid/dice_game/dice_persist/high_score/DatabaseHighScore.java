@@ -8,7 +8,6 @@ import java.util.Properties;
 abstract class DatabaseHighScore<CONNECTION> extends HighScore {
     protected String configurationFilename;
     protected Properties configuration;
-
     protected CONNECTION connection;
 
     protected void loadConfiguration() {
