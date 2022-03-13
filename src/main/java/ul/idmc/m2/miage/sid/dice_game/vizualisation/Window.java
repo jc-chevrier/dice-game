@@ -1,16 +1,14 @@
 package ul.idmc.m2.miage.sid.dice_game.vizualisation;
 
 import org.jetbrains.annotations.NotNull;
-import ul.idmc.m2.miage.sid.dice_game.Main;
 import ul.idmc.m2.miage.sid.dice_game.system.Play;
 import ul.idmc.m2.miage.sid.dice_game.system.PlayEvent;
+import ul.idmc.m2.miage.sid.dice_game.vizualisation.play.PlayView;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 
 public class Window extends JFrame implements PropertyChangeListener, Theme {
     private @NotNull Play play;

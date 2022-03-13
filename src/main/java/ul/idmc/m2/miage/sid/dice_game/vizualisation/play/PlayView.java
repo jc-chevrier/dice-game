@@ -1,7 +1,8 @@
-package ul.idmc.m2.miage.sid.dice_game.vizualisation;
+package ul.idmc.m2.miage.sid.dice_game.vizualisation.play;
 
 import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.system.Play;
+import ul.idmc.m2.miage.sid.dice_game.vizualisation.Theme;
 
 import javax.swing.*;
 import java.awt.*;
