@@ -2,6 +2,8 @@ package ul.idmc.m2.miage.sid.dice_game.vizualisation;
 
 import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.system.Play;
+import ul.idmc.m2.miage.sid.dice_game.vizualisation.high_score.HighScoreView;
+import ul.idmc.m2.miage.sid.dice_game.vizualisation.setting.SettingView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,9 +28,15 @@ public class TopBarView extends JMenuBar implements Theme {
         JMenuItem item1 = new JMenuItem("nouvelle partie");
         item1.addActionListener((e) -> play.start());
         menu.add(item1);
-        JMenuItem item2 = new JMenuItem("abandonner la partie");
-        item2.addActionListener((e) -> play.stop());
+        JMenuItem item2 = new JMenuItem("meilleurs scores");
+        item2.addActionListener((e) -> ((Window) SwingUtilities.getWindowAncestor(this)).setContentPane(new HighScoreView(play)));
         menu.add(item2);
+        JMenuItem item3 = new JMenuItem("paramètres");
+        item3.addActionListener((e) -> ((Window) SwingUtilities.getWindowAncestor(this)).setContentPane(new SettingView(play)));
+        menu.add(item3);
+        JMenuItem item4 = new JMenuItem("arrêt");
+        item4.addActionListener((e) -> play.stop());
+        menu.add(item4);
         add(menu);
 
         setPreferredSize(new Dimension(400, 25));
