@@ -17,12 +17,12 @@ public abstract class HighScore implements Serializable {
 
     public abstract void save();
 
-    public void addScore(@NotNull String playerName, @NotNull Integer scoreNumber) {
-        scores.add(new Score(playerName, scoreNumber));
+    public void addScore(@NotNull String playerName, @NotNull Integer score) {
+        scores.add(new Score(playerName, score));
     }
 
-    public void addScore(@NotNull Player player, @NotNull Integer score) {
-        addScore(player.getName(), score);
+    public void addScore(@NotNull Player player) {
+        addScore(player.getName(), player.getScore());
     }
 
     public @NotNull List<Score> getScores() {

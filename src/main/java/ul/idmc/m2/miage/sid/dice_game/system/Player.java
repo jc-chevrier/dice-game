@@ -1,7 +1,6 @@
 package ul.idmc.m2.miage.sid.dice_game.system;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.beans.PropertyChangeSupport;
 
 public class Player {
@@ -30,27 +29,30 @@ public class Player {
     public void play() {
         support.firePropertyChange(PlayEvent.NEW_TURN.name(), null, null);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {}
+
         dice1.roll();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {}
         dice2.roll();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {}
         evaluateScore();
-        //support.firePropertyChange(PlayEvent.NEW_SCORE.name(), null, null);
+        support.firePropertyChange(PlayEvent.NEW_SCORE.name(), null, null);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {}
+
         support.firePropertyChange(PlayEvent.END_TURN.name(), null, null);
     }
 
-    public void evaluateScore() {
-        Integer result = dice1.getResult() + dice2.getResult();
-        if(result == 7) {
+    public Integer getDicesSumResult() {
+        return dice1.getResult() + dice2.getResult();
+    }
+
+    public Boolean wins() {
+        return getDicesSumResult() <= 10;
+    }
+
+    private void evaluateScore() {
+        if(wins()) {
             score += 10;
         }
     }

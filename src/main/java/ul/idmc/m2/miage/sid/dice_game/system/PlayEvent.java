@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 public enum PlayEvent {
     NEW_PLAY,
     NEW_TURN,
-    DICE_HAVE_ROLLED,
+    DICE_ROLLED,
     NEW_SCORE,
     END_TURN,
     END_PLAY;

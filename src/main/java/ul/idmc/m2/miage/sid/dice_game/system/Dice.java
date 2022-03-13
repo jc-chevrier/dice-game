@@ -17,8 +17,7 @@ public class Dice {
         do {
             result = ((Long) Math.round(Math.random() * 6)).intValue();
         } while (result == 0);
-        support.firePropertyChange(PlayEvent.DICE_HAVE_ROLLED.name(), oldResult, result);
-        System.out.println(result);
+        support.firePropertyChange(PlayEvent.DICE_ROLLED.name(), oldResult, result);
     }
 
     public Integer getResult() {

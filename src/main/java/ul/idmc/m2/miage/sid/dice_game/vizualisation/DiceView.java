@@ -1,17 +1,13 @@
 package ul.idmc.m2.miage.sid.dice_game.vizualisation;
 
 import org.jetbrains.annotations.NotNull;
-import ul.idmc.m2.miage.sid.dice_game.Main;
 import ul.idmc.m2.miage.sid.dice_game.system.Dice;
 import ul.idmc.m2.miage.sid.dice_game.system.PlayEvent;
 import ul.idmc.m2.miage.sid.dice_game.system.Player;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 
 public class DiceView extends JPanel implements PropertyChangeListener, Theme {
     private @NotNull Player player;
@@ -27,36 +23,48 @@ public class DiceView extends JPanel implements PropertyChangeListener, Theme {
         dice.getSupport().addPropertyChangeListener(this);
 
         setBackground(SKY_BLUE);
+
+        setPreferredSize(new Dimension(200, 200));
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        Integer height = getHeight();
+        Integer width = getWidth();
+
         g.setColor(Color.WHITE);
-        g.drawRect(0, 0, 199, 199);
-        g.drawRect(1, 1, 197, 197);
+        g.drawRect(0, 0, width - 1, height - 1);
+        g.drawRect(1, 1, width - 3, height - 3);
+
+        switch (playEvent) {
+            case NEW_TURN, END_TURN -> {
+                setBackground(SKY_BLUE);
+            }
+            case DICE_ROLLED, NEW_SCORE -> {
+                if(player.wins()) {
+                    setBackground(LIGHT_GREEN);
+                } else {
+                    setBackground(SKY_BLUE);
+                }
+            }
+        }
+
         String imagePath = null;
         switch (playEvent) {
             case NEW_TURN -> {
-                imagePath = "./icon/dices_roll.png";
-            }
-            case DICE_HAVE_ROLLED -> {
-                imagePath = "./icon/dice_face_" + dice.getResult() + ".png";
-
+                imagePath = "dices_roll.png";
             }
             case END_TURN -> {
-                imagePath = "./icon/dice_2.png";
+                imagePath = "dice_2.png";
+            }
+            case DICE_ROLLED, NEW_SCORE -> {
+                imagePath = "dice_face_" + dice.getResult() + ".png";
             }
         }
-        Image image = null;
-        try {
-            image = ImageIO.read(Main.class.getResourceAsStream(imagePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        g.drawImage(image, 25, 25, 150, 150, null);
+        Image image = IconManager.getIcon(imagePath);
+        g.drawImage(image, (width - 150) / 2, (height - 150) / 2, 150, 150, null);
     }
 
     @Override

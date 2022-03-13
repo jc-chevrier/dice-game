@@ -8,16 +8,17 @@ import java.beans.PropertyChangeSupport;
 
 public class Play {
     private @NotNull Player player;
-    private @NotNull Integer countTurns;
+    private @NotNull Integer numberTurn;
     private @NotNull HighScoreFactory highScoreFactory;
     private @NotNull HighScore highScore;
     private @NotNull PropertyChangeSupport support;
 
     public Play() {
+        player = new Player("Tom");
+        numberTurn = 0;
         highScoreFactory = new PostgreSQLHighScoreFactory();
         highScore = highScoreFactory.make();
         highScore.load();
-        player = new Player();
         support = new PropertyChangeSupport(this);
     }
 
@@ -27,12 +28,18 @@ public class Play {
 
     public void end() {
         support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
+        highScore.addScore(player);
         System.exit(0);
     }
 
-    public void incrementCountTurns() {
-        if(countTurns < 10) {
-            countTurns++;
+    public void cancel() {
+        support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
+        System.exit(0);
+    }
+
+    public void incrementNumberTurn() {
+        if(numberTurn < 10) {
+            numberTurn++;
             support.firePropertyChange(PlayEvent.NEW_TURN.name(), null, null);
         } else {
             support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
@@ -43,8 +50,8 @@ public class Play {
         return player;
     }
 
-    public Integer getCountTurns() {
-        return countTurns;
+    public Integer getNumberTurn() {
+        return numberTurn;
     }
 
     public HighScore getHighScore() {

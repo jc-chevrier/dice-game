@@ -10,7 +10,7 @@ public interface Theme {
     LIGHT_RED = new Color(255, 99, 71),
     LIGHT_BLUE = new Color(70,130,180),
     SKY_BLUE = new Color(135,206,235),
-    LIGHT_GRAY = new Color(210,210,210),
+    LIGHT_GRAY = new Color(238,238,238),
     LIGHT_YELLOW = new Color(255,242,204);
 }
 
