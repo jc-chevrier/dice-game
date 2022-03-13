@@ -2,9 +2,12 @@ package ul.idmc.m2.miage.sid.dice_game.system;
 
 import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.HighScore;
+import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.Score;
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.HighScoreFactory;
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.PostgreSQLHighScoreFactory;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Play {
     private @NotNull Player player;
@@ -37,9 +40,10 @@ public class Play {
 
     public void end() {
         if(ended()) {
+            List<Score> oldScores = (ArrayList<Score>) ((ArrayList<Score>) highScore.getScores()).clone();
             highScore.addScore(player);
             highScore.save();
-            support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
+            support.firePropertyChange(PlayEvent.END_PLAY.name(), oldScores, highScore.getScores());
         }
     }
 
@@ -49,8 +53,9 @@ public class Play {
 
     public void incrementNumberTurn() {
         if(!ended()) {
+            Integer oldNumberTurn = numberTurn.intValue();
             numberTurn++;
-            support.firePropertyChange(PlayEvent.NEW_TURN.name(), null, null);
+            support.firePropertyChange(PlayEvent.NEW_TURN.name(), oldNumberTurn, numberTurn);
         }
     }
 

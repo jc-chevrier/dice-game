@@ -32,10 +32,11 @@ public class Player {
             Thread.sleep(1000);
         } catch (InterruptedException e) {}
 
+        Integer oldScore = score;
         dice1.roll();
         dice2.roll();
         evaluateScore();
-        support.firePropertyChange(PlayEvent.NEW_SCORE.name(), null, null);
+        support.firePropertyChange(PlayEvent.NEW_SCORE.name(), oldScore, score);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {}
