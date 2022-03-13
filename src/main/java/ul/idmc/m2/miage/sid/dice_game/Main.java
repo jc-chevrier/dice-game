@@ -8,5 +8,10 @@ public class Main {
         Play play = new Play();
         Window window = new Window(play);
         play.start();
-    }
+        while(true){
+            play.getPlayer().play();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {}
+        }}
 }

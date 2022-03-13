@@ -29,9 +29,30 @@ public class Player {
 
     public void play() {
         support.firePropertyChange(PlayEvent.NEW_TURN.name(), null, null);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {}
         dice1.roll();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {}
         dice2.roll();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {}
+        evaluateScore();
+        //support.firePropertyChange(PlayEvent.NEW_SCORE.name(), null, null);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {}
         support.firePropertyChange(PlayEvent.END_TURN.name(), null, null);
+    }
+
+    public void evaluateScore() {
+        Integer result = dice1.getResult() + dice2.getResult();
+        if(result == 7) {
+            score += 10;
+        }
     }
 
     public @NotNull String getName() {
@@ -40,6 +61,14 @@ public class Player {
 
     public @NotNull Integer getScore() {
         return score;
+    }
+
+    public Dice getDice1() {
+        return dice1;
+    }
+
+    public Dice getDice2() {
+        return dice2;
     }
 
     public PropertyChangeSupport getSupport() {

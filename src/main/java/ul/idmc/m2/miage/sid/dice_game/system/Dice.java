@@ -14,11 +14,18 @@ public class Dice {
 
     public void roll() {
         Integer oldResult = result;
-        result = ((Long) Math.round(Math.random() * 6)).intValue();
-        support.firePropertyChange(PlayEvent.DICES_HAVE_ROLLED.name(), oldResult, result);
+        do {
+            result = ((Long) Math.round(Math.random() * 6)).intValue();
+        } while (result == 0);
+        support.firePropertyChange(PlayEvent.DICE_HAVE_ROLLED.name(), oldResult, result);
+        System.out.println(result);
     }
 
     public Integer getResult() {
         return result;
+    }
+
+    public PropertyChangeSupport getSupport() {
+        return support;
     }
 }

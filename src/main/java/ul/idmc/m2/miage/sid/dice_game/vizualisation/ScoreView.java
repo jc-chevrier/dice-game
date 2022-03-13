@@ -1,4 +1,6 @@
 package ul.idmc.m2.miage.sid.dice_game.vizualisation;
 
-public class ScoreView {
+import javax.swing.*;
+
+public class ScoreView extends JPanel {
 }
