@@ -48,7 +48,7 @@ public class Player {
     }
 
     public Boolean wins() {
-        return getDicesSumResult() <= 10;
+        return getDicesSumResult()  == 7;
     }
 
     private void evaluateScore() {

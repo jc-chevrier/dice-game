@@ -38,12 +38,16 @@ public class Play {
     }
 
     public void incrementNumberTurn() {
-        if(numberTurn < 10) {
+        if(!ended()) {
             numberTurn++;
             support.firePropertyChange(PlayEvent.NEW_TURN.name(), null, null);
         } else {
             support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
         }
+    }
+
+    public boolean ended() {
+        return numberTurn == 10;
     }
 
     public Player getPlayer() {

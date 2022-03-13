@@ -5,7 +5,6 @@ import ul.idmc.m2.miage.sid.dice_game.system.Play;
 import ul.idmc.m2.miage.sid.dice_game.system.Player;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.IconManager;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.Theme;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,15 +16,27 @@ public class OptionsView extends JPanel implements Theme {
         this.play = play;
         this.player = play.getPlayer();
 
-        final JButton playButton = new JButton("Jouer");
+        JPanel voidView = new JPanel();
+        voidView.setBackground(Color.LIGHT_GRAY);
+        voidView.setPreferredSize(new Dimension(100, (175 - 100) / 2));
+        add(voidView);
+
+        JButton playButton = new JButton("");
+        playButton.setMargin(new Insets(0, 0, 0, 0));
+        playButton.setBorderPainted(false);
+        playButton.setFocusPainted(false);
+        playButton.setContentAreaFilled(false);
+        playButton.setBackground(Color.LIGHT_GRAY);
         playButton.setIcon(new ImageIcon(IconManager.getIcon("play_arrow.png")
-                           .getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+                           .getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
         playButton.addActionListener((e) -> {
             new Thread(() -> {
                 playButton.setEnabled(false);
                 play.incrementNumberTurn();
                 player.play();
-                playButton.setEnabled(true);
+                if(!play.ended()) {
+                    playButton.setEnabled(true);
+                }
             }).start();
         });
         add(playButton);

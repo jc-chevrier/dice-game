@@ -34,6 +34,8 @@ public class PlayerView extends JPanel implements PropertyChangeListener, Theme 
         Font font = g.getFont();
         FontMetrics fontMetrics = g.getFontMetrics();
 
+        Integer fontSize = 18;
+
         g.setColor(Color.WHITE);
         g.drawRect(0, 0, width - 1, height - 1);
         g.drawRect(1, 1, width - 3, height - 3);
@@ -42,7 +44,7 @@ public class PlayerView extends JPanel implements PropertyChangeListener, Theme 
         g.drawImage(image, (width - 100) / 2,(height - 100) / 3, 100, 100, null);
 
         g.setColor(Color.WHITE);
-        g.setFont(new Font(font.getFontName(), font.getStyle(),18));
+        g.setFont(new Font(font.getFontName(), font.getStyle(),fontSize));
         fontMetrics = g.getFontMetrics();
         int stringX = (width - fontMetrics.stringWidth(player.getName())) / 2;
         g.drawString(player.getName(), stringX, 100 + ((height - 100) / 3) + ((height - 100) / 3));
