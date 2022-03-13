@@ -37,9 +37,9 @@ public class Play {
 
     public void end() {
         if(ended()) {
-            support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
             highScore.addScore(player);
             highScore.save();
+            support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
         }
     }
 
