@@ -29,10 +29,18 @@ public class TopBarView extends JMenuBar implements Theme {
         item1.addActionListener((e) -> play.start());
         menu.add(item1);
         JMenuItem item2 = new JMenuItem("meilleurs scores");
-        item2.addActionListener((e) -> ((Window) SwingUtilities.getWindowAncestor(this)).setContentPane(new HighScoreView(play)));
+        item2.addActionListener((e) -> {
+            Window window = ((Window) SwingUtilities.getWindowAncestor(this));
+            window.setContentPane(new HighScoreView(play));
+            window.repaint();
+        });
         menu.add(item2);
         JMenuItem item3 = new JMenuItem("paramètres");
-        item3.addActionListener((e) -> ((Window) SwingUtilities.getWindowAncestor(this)).setContentPane(new SettingView(play)));
+        item3.addActionListener((e) -> {
+            Window window = ((Window) SwingUtilities.getWindowAncestor(this));
+            window.setContentPane(new SettingView(play));
+            window.repaint();
+        });
         menu.add(item3);
         JMenuItem item4 = new JMenuItem("arrêt");
         item4.addActionListener((e) -> play.stop());
