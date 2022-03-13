@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class HighScore implements Serializable {
-    protected List<Score> scores;
+    protected @NotNull List<Score> scores;
 
     public HighScore() {
         scores = new ArrayList<Score>();
@@ -18,17 +18,14 @@ public abstract class HighScore implements Serializable {
     public abstract void save();
 
     public void addScore(@NotNull String playerName, @NotNull Integer scoreNumber) {
-        scores.stream()
-              .filter(score -> score.isFor(playerName))
-              .findFirst()
-              .ifPresentOrElse((score) -> score.increment(scoreNumber), () -> scores.add(new Score(playerName, scoreNumber)));
+        scores.add(new Score(playerName, scoreNumber));
     }
 
-    public void addScore(@NotNull Player player, @NotNull Integer scoreNumber) {
-        addScore(player.getName(), scoreNumber);
+    public void addScore(@NotNull Player player, @NotNull Integer score) {
+        addScore(player.getName(), score);
     }
 
-    public List<Score> getScores() {
+    public @NotNull List<Score> getScores() {
         return scores;
     }
 

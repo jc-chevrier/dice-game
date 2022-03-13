@@ -38,14 +38,14 @@ public class MySQLHighScore extends SQLHighScore {
 
     @Override
     public void save() {
-        String requestString = "INSERT INTO SCORE (PLAYER_NAME, SCORE_NUMBER) " +
+        String requestString = "INSERT INTO SCORE (DATE, PLAYER_NAME, SCORE) " +
                                "VALUES ";
         for(Score score : scores) {
-            requestString += "('" + score.getPlayerName() + "', " + score.getScoreNumber() + "), ";
+            requestString += "('" + Timestamp.from(score.getDate().toInstant()) + "', '" + score.getPlayerName() + "', " + score.getScore() + "), ";
         }
         requestString = requestString.substring(0, requestString.length() - 2) + " " +
                         "ON DUPLICATE KEY " +
-                        "UPDATE PLAYER_NAME = VALUES(PLAYER_NAME), SCORE_NUMBER = VALUES(SCORE_NUMBER)";
+                        "UPDATE ID = ID;";
 
         try {
             PreparedStatement request = connection.prepareStatement(requestString);

@@ -1,7 +1,6 @@
 package ul.idmc.m2.miage.sid.dice_game.dice_persist.high_score;
 
 import ul.idmc.m2.miage.sid.dice_game.Main;
-
 import java.io.*;
 import java.util.List;
 import java.util.Properties;
@@ -28,7 +27,9 @@ public class SerializationHighScore extends HighScore {
             scores = (List<Score>) ois.readObject();
             ois.close();
         } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Erreur ! Problème au cours de la sérialisation !");
             e.printStackTrace();
+            System.exit(1);
         }
     }
 
@@ -39,7 +40,9 @@ public class SerializationHighScore extends HighScore {
             oos.writeObject(scores);
             oos.close();
         } catch (IOException e) {
+            System.err.println("Erreur ! Problème au cours de la désérialisation !");
             e.printStackTrace();
+            System.exit(1);
         }
     }
 }

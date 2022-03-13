@@ -38,15 +38,15 @@ public class PostgreSQLHighScore extends SQLHighScore {
 
     @Override
     public void save() {
-        String requestString = "INSERT INTO SCORE (PLAYER_NAME, SCORE_NUMBER) " +
+        String requestString = "INSERT INTO SCORE (DATE, PLAYER_NAME, SCORE) " +
                                "VALUES ";
         for(Score score : scores) {
-            requestString += "('" + score.getPlayerName() + "', " + score.getScoreNumber() + "), ";
+            requestString += "('" + Timestamp.from(score.getDate().toInstant()) + "', '" + score.getPlayerName() + "', " + score.getScore() + "), ";
         }
         requestString = requestString.substring(0, requestString.length() - 2) + " " +
-                        "ON CONFLICT (PLAYER_NAME) " +
+                        "ON CONFLICT (DATE, PLAYER_NAME) " +
                         "DO UPDATE " +
-                        "SET PLAYER_NAME = excluded.PLAYER_NAME, SCORE_NUMBER = excluded.SCORE_NUMBER";
+                        "SET ID = SCORE.ID;";
 
         try {
             PreparedStatement request = connection.prepareStatement(requestString);

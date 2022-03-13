@@ -1,11 +1,11 @@
 package ul.idmc.m2.miage.sid.dice_game.dice_persist.high_score;
 
 import ul.idmc.m2.miage.sid.dice_game.Main;
-
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Properties;
 
 public class H2HighScore extends SQLHighScore {
@@ -41,14 +41,14 @@ public class H2HighScore extends SQLHighScore {
 
     @Override
     public void save() {
-        String requestString = "INSERT INTO SCORE (PLAYER_NAME, SCORE_NUMBER) " +
+        String requestString = "INSERT INTO SCORE (DATE, PLAYER_NAME, SCORE) " +
                                "VALUES ";
         for(Score score : scores) {
-            requestString += "('" + score.getPlayerName() + "', " + score.getScoreNumber() + "), ";
+            requestString += "('" + Timestamp.from(score.getDate().toInstant()) + "', '" + score.getPlayerName() + "', " + score.getScore() + "), ";
         }
         requestString = requestString.substring(0, requestString.length() - 2) + " " +
                         "ON DUPLICATE KEY " +
-                        "UPDATE PLAYER_NAME = VALUES(PLAYER_NAME), SCORE_NUMBER = VALUES(SCORE_NUMBER)";
+                        "UPDATE ID = ID;";
 
         try {
             PreparedStatement request = connection.prepareStatement(requestString);

@@ -1,9 +1,6 @@
 package ul.idmc.m2.miage.sid.dice_game.dice_persist.high_score;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 abstract class SQLHighScore extends DatabaseHighScore<Connection> {
     @Override
@@ -17,9 +14,10 @@ abstract class SQLHighScore extends DatabaseHighScore<Connection> {
             ResultSet result = request.executeQuery(requestString);
 
             while(result.next()) {
+                java.util.Date date = result.getTimestamp("DATE");
                 String playerName = result.getString("PLAYER_NAME");
-                Integer scoreNumber = result.getInt("SCORE_NUMBER");
-                Score score = new Score(playerName, scoreNumber);
+                Integer scoreNumber = result.getInt("SCORE");
+                Score score = new Score(date, playerName, scoreNumber);
                 scores.add(score);
             }
 
