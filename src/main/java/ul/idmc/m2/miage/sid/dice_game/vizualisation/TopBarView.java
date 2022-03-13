@@ -27,7 +27,7 @@ public class TopBarView extends JMenuBar implements Theme {
         item1.addActionListener((e) -> play.start());
         menu.add(item1);
         JMenuItem item2 = new JMenuItem("abandonner la partie");
-        item2.addActionListener((e) -> play.cancel());
+        item2.addActionListener((e) -> play.stop());
         menu.add(item2);
         add(menu);
 

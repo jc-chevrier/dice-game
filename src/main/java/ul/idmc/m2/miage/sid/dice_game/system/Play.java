@@ -14,31 +14,33 @@ public class Play {
     private @NotNull PropertyChangeSupport support;
 
     public Play() {
-        player = new Player("Tom");
         numberTurn = 0;
         highScoreFactory = new PostgreSQLHighScoreFactory();
         highScore = highScoreFactory.make();
         highScore.load();
+        if(highScore.getScores().isEmpty()) {
+            player = new Player();
+        } else {
+            player = new Player(highScore.getScores().get(0).getPlayerName());
+        }
         support = new PropertyChangeSupport(this);
     }
 
     public void start() {
-        support.firePropertyChange(PlayEvent.NEW_PLAY.name(), null, null);
+        support.firePropertyChange((player.getName().isEmpty() ? PlayEvent.NEW_USER : PlayEvent.NEW_PLAY).name(),
+                                    null, null);
     }
 
     public void end() {
         if(ended()) {
             support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
             highScore.addScore(player);
-            System.exit(0);
+            highScore.save();
         }
     }
 
-    public void cancel() {
-        if(!ended()) {
-            support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
-            System.exit(0);
-        }
+    public void stop() {
+        System.exit(0);
     }
 
     public void incrementNumberTurn() {
