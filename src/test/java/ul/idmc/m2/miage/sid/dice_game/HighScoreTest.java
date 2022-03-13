@@ -1,7 +1,7 @@
 package ul.idmc.m2.miage.sid.dice_game;
 
-import ul.idmc.m2.miage.sid.dice_game.dice_persist.high_score.HighScore;
-import ul.idmc.m2.miage.sid.dice_game.dice_persist.high_score_factory.*;
+import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.HighScore;
+import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.*;
 
 import java.io.File;
 import java.io.IOException;
