@@ -14,6 +14,11 @@ public class Play {
     private @NotNull PropertyChangeSupport support;
 
     public Play() {
+        initialize();
+        support = new PropertyChangeSupport(this);
+    }
+
+    private void initialize() {
         numberTurn = 0;
         highScoreFactory = new PostgreSQLHighScoreFactory();
         highScore = highScoreFactory.make();
@@ -23,12 +28,11 @@ public class Play {
         } else {
             player = new Player(highScore.getScores().get(0).getPlayerName());
         }
-        support = new PropertyChangeSupport(this);
     }
 
     public void start() {
-        support.firePropertyChange((player.getName().isEmpty() ? PlayEvent.NEW_USER : PlayEvent.NEW_PLAY).name(),
-                                    null, null);
+        initialize();
+        support.firePropertyChange((player.getName().isEmpty() ? PlayEvent.NEW_USER : PlayEvent.NEW_PLAY).name(), null, null);
     }
 
     public void end() {

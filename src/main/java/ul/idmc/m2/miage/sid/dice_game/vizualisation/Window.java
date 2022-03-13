@@ -25,6 +25,7 @@ public class Window extends JFrame implements PropertyChangeListener, Theme {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setJMenuBar(new TopBarView(play));
+        pack();
     }
 
     @Override
@@ -32,45 +33,41 @@ public class Window extends JFrame implements PropertyChangeListener, Theme {
         switch (PlayEvent.valueOf(evt.getPropertyName())) {
             case NEW_USER -> {
                 setContentPane(new SettingView(play));
-                new Thread(() -> {
-                    pack();
-                    setVisible(true);
-                }).start();
+                repaint();
+                pack();
+                setVisible(true);
             }
             case NEW_PLAY -> {
                 setContentPane(new PlayView(play));
-                new Thread(() -> {
-                    pack();
-                    setVisible(true);
-                }).start();
+                repaint();
+                pack();
+                setVisible(true);
             }
             case END_PLAY -> {
-                new Thread(() -> {
-                    JOptionPane.showOptionDialog(this,
-                                                "Partie terminée !\nVous avez obtenu ce score : " +
-                                                play.getPlayer().getScore() + " !",
-                                                "Dice Game",
-                                                JOptionPane.OK_CANCEL_OPTION,
-                                                JOptionPane.INFORMATION_MESSAGE,
-                                                new ImageIcon(IconManager.get("dice.png")
-                                                .getScaledInstance(40, 40, Image.SCALE_SMOOTH)),
-                                                new String[]{"Ok", "Annuler"},
-                                                "Ok");
-                    Integer option = JOptionPane.showOptionDialog(this,
-                                                                  "Commencer une nouvelle partie ?",
-                                                                  "Dice Game",
-                                                                  JOptionPane.YES_NO_OPTION,
-                                                                  JOptionPane.QUESTION_MESSAGE,
-                                                                  new ImageIcon(IconManager.get("dice.png")
-                                                                  .getScaledInstance(40, 40, Image.SCALE_SMOOTH)),
-                                                                  new String[]{"Oui", "Non"},
-                                                                  "Oui");
-                    if(option.equals(JOptionPane.YES_OPTION)) {
-                        play.start();
-                    } else {
-                        play.stop();
-                    }
-                }).start();
+                JOptionPane.showOptionDialog(this,
+                                             "Partie terminée !\nVous avez obtenu ce score : " +
+                                             play.getPlayer().getScore() + " !",
+                                             "Dice Game",
+                                             JOptionPane.OK_CANCEL_OPTION,
+                                             JOptionPane.INFORMATION_MESSAGE,
+                                             new ImageIcon(IconManager.get("dice.png")
+                                             .getScaledInstance(40, 40, Image.SCALE_SMOOTH)),
+                                             new String[]{"Ok", "Annuler"},
+                                             "Ok");
+                Integer option = JOptionPane.showOptionDialog(this,
+                                                             "Commencer une nouvelle partie ?",
+                                                             "Dice Game",
+                                                             JOptionPane.YES_NO_OPTION,
+                                                             JOptionPane.QUESTION_MESSAGE,
+                                                             new ImageIcon(IconManager.get("dice.png")
+                                                             .getScaledInstance(40, 40, Image.SCALE_SMOOTH)),
+                                                             new String[]{"Oui", "Non"},
+                                                             "Oui");
+                if(option.equals(JOptionPane.YES_OPTION)) {
+                    play.start();
+                } else {
+                    play.stop();
+                }
             }
         }
     }
