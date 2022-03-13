@@ -6,6 +6,8 @@ import ul.idmc.m2.miage.sid.dice_game.vizualisation.Theme;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 public class PlayView extends JPanel implements Theme {
     private @NotNull Play play;

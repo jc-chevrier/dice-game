@@ -27,14 +27,16 @@ public class OptionsView extends JPanel implements Theme {
         playButton.setFocusPainted(false);
         playButton.setContentAreaFilled(false);
         playButton.setBackground(Color.LIGHT_GRAY);
-        playButton.setIcon(new ImageIcon(IconManager.getIcon("play_arrow.png")
+        playButton.setIcon(new ImageIcon(IconManager.get("play_arrow.png")
                            .getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
         playButton.addActionListener((e) -> {
             new Thread(() -> {
                 playButton.setEnabled(false);
                 play.incrementNumberTurn();
                 player.play();
-                if(!play.ended()) {
+                if(play.ended()) {
+                    play.end();
+                } else {
                     playButton.setEnabled(true);
                 }
             }).start();

@@ -34,7 +34,7 @@ public class IconManager {
     }
 
 
-    public static @NotNull Image getIcon(@NotNull String iconName) {
+    public static @NotNull Image get(@NotNull String iconName) {
         return ICONS.get(iconName);
     }
 }

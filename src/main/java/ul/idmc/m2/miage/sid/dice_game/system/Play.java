@@ -27,22 +27,24 @@ public class Play {
     }
 
     public void end() {
-        support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
-        highScore.addScore(player);
-        System.exit(0);
+        if(ended()) {
+            support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
+            highScore.addScore(player);
+            System.exit(0);
+        }
     }
 
     public void cancel() {
-        support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
-        System.exit(0);
+        if(!ended()) {
+            support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
+            System.exit(0);
+        }
     }
 
     public void incrementNumberTurn() {
         if(!ended()) {
             numberTurn++;
             support.firePropertyChange(PlayEvent.NEW_TURN.name(), null, null);
-        } else {
-            support.firePropertyChange(PlayEvent.END_PLAY.name(), null, null);
         }
     }
 

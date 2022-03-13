@@ -40,7 +40,7 @@ public class PlayerView extends JPanel implements PropertyChangeListener, Theme 
         g.drawRect(0, 0, width - 1, height - 1);
         g.drawRect(1, 1, width - 3, height - 3);
 
-        Image image = IconManager.getIcon("player.png");
+        Image image = IconManager.get("player.png");
         g.drawImage(image, (width - 100) / 2,(height - 100) / 3, 100, 100, null);
 
         g.setColor(Color.WHITE);
