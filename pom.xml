@@ -69,21 +69,5 @@
                 </executions>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>${basedir}/src/main/resources/ul/idmc/m2/miage/sid/dice_game/configuration</directory>
-                <targetPath>${basedir}/target/classes/ul/idmc/m2/miage/sid/dice_game/configuration</targetPath>
-                <includes>
-                    <include>*</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>${basedir}/src/main/resources/ul/idmc/m2/miage/sid/dice_game/icon</directory>
-                <targetPath>${basedir}/target/classes/ul/idmc/m2/miage/sid/dice_game/icon</targetPath>
-                <includes>
-                    <include>*</include>
-                </includes>
-            </resource>
-        </resources>
     </build>
 </project>
