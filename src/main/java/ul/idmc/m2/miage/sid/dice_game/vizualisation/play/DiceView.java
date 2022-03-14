@@ -66,7 +66,7 @@ public class DiceView extends JPanel implements PropertyChangeListener, Theme {
                 imagePath = "dice_face_" + dice.getResult() + ".png";
             }
         }
-        Image image = IconManager.get(imagePath);
+        Image image = IconManager.getInstance().get(imagePath);
         g.drawImage(image, (width - 150) / 2, (height - 150) / 2, 150, 150, null);
     }
 

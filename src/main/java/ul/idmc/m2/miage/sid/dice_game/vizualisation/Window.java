@@ -19,7 +19,7 @@ public class Window extends JFrame implements PropertyChangeListener, Theme {
         play.getSupport().addPropertyChangeListener(this);
 
         setTitle("Dice Game");
-        setIconImage(IconManager.get("dice.png"));
+        setIconImage(IconManager.getInstance().get("dice.png"));
         setSize(new Dimension(400, 400));
         setResizable(false);
         setLocationRelativeTo(null);
@@ -50,7 +50,7 @@ public class Window extends JFrame implements PropertyChangeListener, Theme {
                                              "Dice Game",
                                              JOptionPane.OK_CANCEL_OPTION,
                                              JOptionPane.INFORMATION_MESSAGE,
-                                             new ImageIcon(IconManager.get("dice.png")
+                                             new ImageIcon(IconManager.getInstance().get("dice.png")
                                              .getScaledInstance(40, 40, Image.SCALE_SMOOTH)),
                                              new String[]{"Ok", "Annuler"},
                                              "Ok");
@@ -59,7 +59,7 @@ public class Window extends JFrame implements PropertyChangeListener, Theme {
                                                              "Dice Game",
                                                              JOptionPane.YES_NO_OPTION,
                                                              JOptionPane.QUESTION_MESSAGE,
-                                                             new ImageIcon(IconManager.get("dice.png")
+                                                             new ImageIcon(IconManager.getInstance().get("dice.png")
                                                              .getScaledInstance(40, 40, Image.SCALE_SMOOTH)),
                                                              new String[]{"Oui", "Non"},
                                                              "Oui");
