@@ -13,5 +13,5 @@ Jeu de dé en client lourd
 - ARNOULD Maxime
 - CHEVRIER Jean-Christophe
 
-### Installtion et exécution
+### Installation et exécution
      mvn package && java -jar .\target\dice-game-1.0-SNAPSHOT.jar
