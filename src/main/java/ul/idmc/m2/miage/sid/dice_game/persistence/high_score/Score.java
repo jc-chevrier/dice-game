@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.system.Player;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class Score implements Serializable {
     private @NotNull Date date;
@@ -50,6 +51,19 @@ public class Score implements Serializable {
 
     public @NotNull Integer getScore() {
         return score;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Score score1 = (Score) o;
+        return date.equals(score1.date) && playerName.equals(score1.playerName) && score.equals(score1.score);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, playerName, score);
     }
 
     @Override

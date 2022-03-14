@@ -18,13 +18,17 @@ public abstract class HighScore implements Serializable {
 
     public abstract void save();
 
+    public void addScore(@NotNull Score score) {
+        scores.add(score);
+        Collections.sort(scores, (score1, score2) -> score1.getDate().compareTo(score2.getDate()));
+    }
+
     public void addScore(@NotNull String playerName, @NotNull Integer score) {
-        scores.add(new Score(playerName, score));
+        addScore(new Score(playerName, score));
     }
 
     public void addScore(@NotNull Player player) {
         addScore(player.getName(), player.getScore());
-        Collections.sort(scores, (score1, score2) -> score1.getDate().compareTo(score2.getDate()));
     }
 
     public @NotNull List<Score> getScores() {

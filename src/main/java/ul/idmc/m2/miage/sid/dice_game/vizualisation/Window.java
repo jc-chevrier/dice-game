@@ -5,6 +5,8 @@ import ul.idmc.m2.miage.sid.dice_game.system.Play;
 import ul.idmc.m2.miage.sid.dice_game.system.PlayEvent;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.play.PlayView;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.setting.SettingView;
+import ul.idmc.m2.miage.sid.dice_game.vizualisation.setting.StartSettingView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
@@ -32,14 +34,28 @@ public class Window extends JFrame implements PropertyChangeListener, Theme {
     public void propertyChange(PropertyChangeEvent evt) {
         switch (PlayEvent.valueOf(evt.getPropertyName())) {
             case NEW_USER -> {
-                setContentPane(new SettingView(play));
+                setContentPane(new StartSettingView(play));
                 repaint();
+
+                JMenu optionsMenu = getJMenuBar().getMenu(0);
+                optionsMenu.getItem(0).setEnabled(false);
+                optionsMenu.getItem(1).setEnabled(false);
+                optionsMenu.getItem(2).setEnabled(false);
+
                 pack();
                 setVisible(true);
             }
             case NEW_PLAY -> {
                 setContentPane(new PlayView(play));
                 repaint();
+
+                JMenu optionsMenu = getJMenuBar().getMenu(0);
+                if (!optionsMenu.getItem(0).isEnabled()) {
+                    optionsMenu.getItem(0).setEnabled(true);
+                    optionsMenu.getItem(1).setEnabled(true);
+                    optionsMenu.getItem(2).setEnabled(true);
+                }
+
                 pack();
                 setVisible(true);
             }
@@ -48,11 +64,11 @@ public class Window extends JFrame implements PropertyChangeListener, Theme {
                                              "Partie \u0074\u0065\u0072\u006d\u0069\u006e\u00e9\u0065 !\nVous avez obtenu ce score : " +
                                              play.getPlayer().getScore() + " !",
                                              "Dice Game",
-                                             JOptionPane.OK_CANCEL_OPTION,
+                                             JOptionPane.PLAIN_MESSAGE,
                                              JOptionPane.INFORMATION_MESSAGE,
                                              new ImageIcon(IconManager.getInstance().get("dice.png")
                                              .getScaledInstance(40, 40, Image.SCALE_SMOOTH)),
-                                             new String[]{"Ok", "Annuler"},
+                                             new String[]{"Ok"},
                                              "Ok");
                 Integer option = JOptionPane.showOptionDialog(this,
                                                              "Commencer une nouvelle partie ?",

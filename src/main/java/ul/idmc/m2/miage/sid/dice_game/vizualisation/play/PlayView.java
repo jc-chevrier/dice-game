@@ -42,7 +42,6 @@ public class PlayView extends JPanel implements Theme {
         datasView.add(optionsView);
         add(datasView);
 
-
         setBackground(LIGHT_GRAY);
         setPreferredSize(new Dimension(width, height));
     }

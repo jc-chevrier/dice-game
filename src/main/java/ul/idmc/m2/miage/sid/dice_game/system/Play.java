@@ -91,11 +91,14 @@ public class Play {
 
     public void setHighScoreFactory(@NotNull HighScoreFactory highScoreFactory) {
         this.highScoreFactory = highScoreFactory;
-        List<Score> scores = highScore.getScores();
+
         highScore = highScoreFactory.make();
         highScore.load();
-        scores.forEach(score -> highScore.addScore(score.getPlayerName(), score.getScore()));//TODO
-        highScore.save();
+
+        List<Score> scores = highScore.getScores();
+        if(player.getName().isEmpty() && !scores.isEmpty()) {
+            player = new Player(scores.get(scores.size() - 1).getPlayerName());
+        }
     }
 
     public @NotNull PropertyChangeSupport getSupport() {

@@ -23,37 +23,37 @@ public class TopBarView extends JMenuBar implements Theme {
         UIManager.put("MenuItem.selectionBackground", SKY_BLUE);
         UIManager.put("MenuItem.selectionForeground", Color.BLACK);
 
-        JMenu menu = new JMenu("options");
-        menu.setPreferredSize(new Dimension(60, 20));
+        JMenu optionsMenu = new JMenu("Options");
+        optionsMenu.setPreferredSize(new Dimension(60, 20));
+        add(optionsMenu);
 
-        JMenuItem item1 = new JMenuItem("nouvelle partie");//TODO
-        item1.addActionListener((e) -> play.start());
-        menu.add(item1);
+        JMenuItem startItem = new JMenuItem("Nouvelle partie");
+        startItem.addActionListener((e) -> play.start());
+        optionsMenu.add(startItem);
 
-        JMenuItem item2 = new JMenuItem("meilleurs scores");
-        item2.addActionListener((e) -> {
+        JMenuItem highScoresItem = new JMenuItem("Meilleurs scores");
+        highScoresItem.addActionListener((e) -> {
             Window window = ((Window) SwingUtilities.getWindowAncestor(this));
             window.setContentPane(new HighScoreView(play));
             window.repaint();
             window.pack();
             window.setVisible(true);
         });
-        menu.add(item2);
+        optionsMenu.add(highScoresItem);
 
-        JMenuItem item3 = new JMenuItem("\u0070\u0061\u0072\u0061\u006d\u00e8\u0074\u0072\u0065\u0073");
-        item3.addActionListener((e) -> {
+        JMenuItem settingsItem = new JMenuItem("Param\u00e8tres");
+        settingsItem.addActionListener((e) -> {
             Window window = ((Window) SwingUtilities.getWindowAncestor(this));
             window.setContentPane(new SettingView(play));
             window.repaint();
             window.pack();
             window.setVisible(true);
         });
-        menu.add(item3);
+        optionsMenu.add(settingsItem);
 
-        JMenuItem item4 = new JMenuItem("\u0061\u0072\u0072\u00ea\u0074");
-        item4.addActionListener((e) -> play.stop());
-        menu.add(item4);
-        add(menu);
+        JMenuItem stopItem = new JMenuItem("Arr\u00eat");
+        stopItem.addActionListener((e) -> play.stop());
+        optionsMenu.add(stopItem);
 
         setPreferredSize(new Dimension(400, 25));
     }
