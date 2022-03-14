@@ -17,24 +17,34 @@ public class Play {
     private @NotNull PropertyChangeSupport support;
 
     public Play() {
-        initialize();
+        reinitialize();
         support = new PropertyChangeSupport(this);
     }
 
-    private void initialize() {
+    private void reinitialize() {
         numberTurn = 0;
-        highScoreFactory = new PostgreSQLHighScoreFactory();
+
+        if (highScoreFactory == null) {
+            highScoreFactory = new PostgreSQLHighScoreFactory();
+        }
+
         highScore = highScoreFactory.make();
         highScore.load();
-        if(highScore.getScores().isEmpty()) {
-            player = new Player();
+
+        if(player == null) {
+            if(highScore.getScores().isEmpty()) {
+                player = new Player();
+            } else {
+                List<Score> scores = highScore.getScores();
+                player = new Player(scores.get(scores.size() - 1).getPlayerName());
+            }
         } else {
-            player = new Player(highScore.getScores().get(0).getPlayerName());
+            player = new Player(player.getName());
         }
     }
 
     public void start() {
-        initialize();
+        reinitialize();
         support.firePropertyChange((player.getName().isEmpty() ? PlayEvent.NEW_USER : PlayEvent.NEW_PLAY).name(), null, null);
     }
 
@@ -83,7 +93,8 @@ public class Play {
         this.highScoreFactory = highScoreFactory;
         List<Score> scores = highScore.getScores();
         highScore = highScoreFactory.make();
-        highScore.setScores(scores);
+        highScore.load();
+        scores.forEach(score -> highScore.addScore(score.getPlayerName(), score.getScore()));//TODO
         highScore.save();
     }
 

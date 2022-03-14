@@ -35,7 +35,7 @@ public class Player {
         Integer oldScore = score;
         dice1.roll();
         dice2.roll();
-        evaluateScore();
+        reevaluateScore();
         support.firePropertyChange(PlayEvent.NEW_SCORE.name(), oldScore.equals(score) ? null : oldScore, score);
         try {
             Thread.sleep(2000);
@@ -52,7 +52,7 @@ public class Player {
         return getDicesSumResult()  == 7;
     }
 
-    private void evaluateScore() {
+    private void reevaluateScore() {
         if(wins()) {
             score += 10;
         }

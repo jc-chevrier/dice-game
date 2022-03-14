@@ -4,11 +4,11 @@ import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.system.Player;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class HighScore implements Serializable {
     protected @NotNull List<Score> scores;
-    protected static @NotNull HighScore highScoreSingleton;
 
     protected HighScore() {
         scores = new ArrayList<Score>();
@@ -24,6 +24,7 @@ public abstract class HighScore implements Serializable {
 
     public void addScore(@NotNull Player player) {
         addScore(player.getName(), player.getScore());
+        Collections.sort(scores, (score1, score2) -> score1.getDate().compareTo(score2.getDate()));
     }
 
     public @NotNull List<Score> getScores() {

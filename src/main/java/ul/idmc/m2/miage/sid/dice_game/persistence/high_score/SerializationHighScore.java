@@ -3,12 +3,14 @@ package ul.idmc.m2.miage.sid.dice_game.persistence.high_score;
 import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.Main;
 import java.io.*;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
 public class SerializationHighScore extends HighScore {
     private final static String CONFIGURATION_FILENAME = "configuration/serialization.properties";
     private static Properties CONFIGURATION;
+    private static @NotNull SerializationHighScore highScoreSingleton;
 
     static {
         try {
@@ -37,6 +39,7 @@ public class SerializationHighScore extends HighScore {
         try {
             ObjectInputStream ois  = new ObjectInputStream(new FileInputStream(CONFIGURATION.getProperty("dataFilename")));
             scores = (List<Score>) ois.readObject();
+            Collections.sort(scores, (score1, score2) -> score1.getDate().compareTo(score2.getDate()));
             ois.close();
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Erreur ! Problème au cours de la sérialisation !");

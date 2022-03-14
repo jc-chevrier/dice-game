@@ -12,6 +12,7 @@ import java.util.Properties;
 public class H2HighScore extends SQLHighScore {
     private final static String CONFIGURATION_FILENAME = "configuration/h2.properties";
     private static Properties CONFIGURATION;
+    private static @NotNull H2HighScore highScoreSingleton;
 
     static {
         try {
@@ -53,26 +54,28 @@ public class H2HighScore extends SQLHighScore {
 
     @Override
     public void save() {
-        String requestString = "INSERT INTO SCORE (DATE, PLAYER_NAME, SCORE) " +
-                               "VALUES ";
-        for(Score score : scores) {
-            requestString += "('" + Timestamp.from(score.getDate().toInstant()) + "', '" + score.getPlayerName() + "', " + score.getScore() + "), ";
-        }
-        requestString = requestString.substring(0, requestString.length() - 2) + " " +
-                        "ON DUPLICATE KEY " +
-                        "UPDATE ID = ID;";
+        if(!scores.isEmpty()) {
+            String requestString = "INSERT INTO SCORE (DATE, PLAYER_NAME, SCORE) " +
+                    "VALUES ";
+            for (Score score : scores) {
+                requestString += "('" + Timestamp.from(score.getDate().toInstant()) + "', '" + score.getPlayerName() + "', " + score.getScore() + "), ";
+            }
+            requestString = requestString.substring(0, requestString.length() - 2) + " " +
+                    "ON DUPLICATE KEY " +
+                    "UPDATE ID = ID;";
 
-        try {
-            PreparedStatement request = connection.prepareStatement(requestString);
-            request.executeUpdate();
+            try {
+                PreparedStatement request = connection.prepareStatement(requestString);
+                request.executeUpdate();
 
-            connection.commit();
+                connection.commit();
 
-            request.close();
-        } catch (SQLException e) {
-            System.err.println("Erreur ! Une requête d'insertion a échouée : \"" + requestString + "\" !");
-            e.printStackTrace();
-            System.exit(1);
+                request.close();
+            } catch (SQLException e) {
+                System.err.println("Erreur ! Une requête d'insertion a échouée : \"" + requestString + "\" !");
+                e.printStackTrace();
+                System.exit(1);
+            }
         }
     }
 }

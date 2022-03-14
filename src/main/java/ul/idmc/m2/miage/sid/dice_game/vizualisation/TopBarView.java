@@ -26,7 +26,7 @@ public class TopBarView extends JMenuBar implements Theme {
         JMenu menu = new JMenu("options");
         menu.setPreferredSize(new Dimension(60, 20));
 
-        JMenuItem item1 = new JMenuItem("nouvelle partie");
+        JMenuItem item1 = new JMenuItem("nouvelle partie");//TODO
         item1.addActionListener((e) -> play.start());
         menu.add(item1);
 

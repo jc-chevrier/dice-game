@@ -7,7 +7,8 @@ abstract class SQLHighScore extends DatabaseHighScore<Connection> {
     public void load() {
         scores.clear();
 
-        String requestString = "SELECT * FROM SCORE;";
+        String requestString = "SELECT * FROM SCORE " +
+                               "ORDER BY DATE;";
 
         try {
             Statement request = connection.createStatement();
