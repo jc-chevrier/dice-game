@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.Properties;
 
 public class MySQLHighScore extends SQLHighScore {
-    private final static String CONFIGURATION_FILENAME = "./configuration/mysql.properties";
+    private final static String CONFIGURATION_FILENAME = "configuration/mysql.properties";
     private static Properties CONFIGURATION;
 
     static {

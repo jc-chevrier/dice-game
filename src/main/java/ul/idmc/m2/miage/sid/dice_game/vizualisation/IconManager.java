@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IconManager {
-    public final static @NotNull String ICONS_REPOSITORY = "./icon/";
+    public final static @NotNull String ICONS_REPOSITORY = "icon/";
     
     public final static @NotNull Map<String, Image> ICONS;
 

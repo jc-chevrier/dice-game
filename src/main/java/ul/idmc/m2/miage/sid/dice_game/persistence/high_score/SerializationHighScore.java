@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class SerializationHighScore extends HighScore {
-    private final static String CONFIGURATION_FILENAME = "./configuration/serialization.properties";
+    private final static String CONFIGURATION_FILENAME = "configuration/serialization.properties";
     private static Properties CONFIGURATION;
 
     static {

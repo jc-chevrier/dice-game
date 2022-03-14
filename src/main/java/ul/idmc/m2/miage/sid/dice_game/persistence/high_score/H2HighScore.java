@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.Properties;
 
 public class H2HighScore extends SQLHighScore {
-    private final static String CONFIGURATION_FILENAME = "./configuration/h2.properties";
+    private final static String CONFIGURATION_FILENAME = "configuration/h2.properties";
     private static Properties CONFIGURATION;
 
     static {
