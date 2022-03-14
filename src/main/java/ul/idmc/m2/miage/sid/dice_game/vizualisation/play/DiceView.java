@@ -42,14 +42,14 @@ public class DiceView extends JPanel implements PropertyChangeListener, Theme {
         g.drawRect(1, 1, width - 3, height - 3);
 
         switch (playEvent) {
-            case NEW_TURN, END_TURN -> {
+            case NEW_TURN, DICE_ROLLED, END_TURN -> {
                 setBackground(SKY_BLUE);
             }
-            case DICE_ROLLED, NEW_SCORE -> {
+            case NEW_SCORE -> {
                 if(player.wins()) {
                     setBackground(LIGHT_GREEN);
                 } else {
-                    setBackground(SKY_BLUE);
+                    setBackground(LIGHT_RED);
                 }
             }
         }

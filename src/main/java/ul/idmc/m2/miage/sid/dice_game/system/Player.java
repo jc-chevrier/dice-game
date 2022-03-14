@@ -36,7 +36,7 @@ public class Player {
         dice1.roll();
         dice2.roll();
         evaluateScore();
-        support.firePropertyChange(PlayEvent.NEW_SCORE.name(), oldScore, score);
+        support.firePropertyChange(PlayEvent.NEW_SCORE.name(), oldScore.equals(score) ? null : oldScore, score);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {}

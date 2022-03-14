@@ -67,9 +67,11 @@ public class ScoreView extends JPanel implements PropertyChangeListener, Theme {
         g.drawString(string, stringX, 120);
 
         string = player.getScore() + "";
-        Boolean playerWins = (playEvent == PlayEvent.DICE_ROLLED || playEvent == PlayEvent.NEW_SCORE) && player.wins();
-        g.setColor(playerWins ? LIGHT_GREEN : Color.WHITE);
-        g.setFont(new Font(font.getFontName(), Font.BOLD, playerWins ? bigFontSize : normalFontSize));
+        Boolean newScore = playEvent == PlayEvent.NEW_SCORE;
+        Boolean playerWins = newScore && player.wins();
+        Boolean playerDontWins =  newScore && !player.wins();
+        g.setColor(playerWins ? LIGHT_GREEN : (playerDontWins ? LIGHT_RED : Color.WHITE));
+        g.setFont(new Font(font.getFontName(), Font.BOLD, newScore ? bigFontSize : normalFontSize));
         fontMetrics = g.getFontMetrics();
         stringX = (width - fontMetrics.stringWidth(string)) / 2;
         g.drawString(string, stringX, 150);

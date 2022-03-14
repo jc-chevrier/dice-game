@@ -40,7 +40,7 @@ public class TopBarView extends JMenuBar implements Theme {
         });
         menu.add(item2);
 
-        JMenuItem item3 = new JMenuItem("paramètres");
+        JMenuItem item3 = new JMenuItem("\u0070\u0061\u0072\u0061\u006d\u00e8\u0074\u0072\u0065\u0073");
         item3.addActionListener((e) -> {
             Window window = ((Window) SwingUtilities.getWindowAncestor(this));
             window.setContentPane(new SettingView(play));
@@ -50,7 +50,7 @@ public class TopBarView extends JMenuBar implements Theme {
         });
         menu.add(item3);
 
-        JMenuItem item4 = new JMenuItem("arrêt");
+        JMenuItem item4 = new JMenuItem("\u0061\u0072\u0072\u00ea\u0074");
         item4.addActionListener((e) -> play.stop());
         menu.add(item4);
         add(menu);

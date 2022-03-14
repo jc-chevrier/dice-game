@@ -45,7 +45,7 @@ public class Window extends JFrame implements PropertyChangeListener, Theme {
             }
             case END_PLAY -> {
                 JOptionPane.showOptionDialog(this,
-                                             "Partie terminée !\nVous avez obtenu ce score : " +
+                                             "Partie \u0074\u0065\u0072\u006d\u0069\u006e\u00e9\u0065 !\nVous avez obtenu ce score : " +
                                              play.getPlayer().getScore() + " !",
                                              "Dice Game",
                                              JOptionPane.OK_CANCEL_OPTION,
