@@ -8,8 +8,9 @@ import java.util.List;
 
 public abstract class HighScore implements Serializable {
     protected @NotNull List<Score> scores;
+    protected static @NotNull HighScore highScoreSingleton;
 
-    public HighScore() {
+    protected HighScore() {
         scores = new ArrayList<Score>();
     }
 
@@ -27,6 +28,10 @@ public abstract class HighScore implements Serializable {
 
     public @NotNull List<Score> getScores() {
         return scores;
+    }
+
+    public void setScores(@NotNull List<Score> scores) {
+        this.scores = scores;
     }
 
     @Override

@@ -7,6 +7,6 @@ import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.MySQLHighScore;
 public class MySQLHighScoreFactory implements HighScoreFactory {
     @Override
     public @NotNull HighScore make() {
-        return new MySQLHighScore();
+        return MySQLHighScore.getInstance();
     }
 }

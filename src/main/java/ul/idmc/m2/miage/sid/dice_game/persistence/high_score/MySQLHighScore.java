@@ -1,5 +1,6 @@
 package ul.idmc.m2.miage.sid.dice_game.persistence.high_score;
 
+import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.Main;
 import java.io.IOException;
 import java.sql.*;
@@ -18,6 +19,17 @@ public class MySQLHighScore extends SQLHighScore {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    private MySQLHighScore() {
+        super();
+    }
+
+    public static @NotNull HighScore getInstance() {
+        if (highScoreSingleton == null) {
+            highScoreSingleton = new MySQLHighScore();
+        }
+        return highScoreSingleton;
     }
 
     @Override

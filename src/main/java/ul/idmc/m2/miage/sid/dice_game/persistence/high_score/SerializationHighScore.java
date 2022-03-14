@@ -1,5 +1,6 @@
 package ul.idmc.m2.miage.sid.dice_game.persistence.high_score;
 
+import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.Main;
 import java.io.*;
 import java.util.List;
@@ -18,6 +19,17 @@ public class SerializationHighScore extends HighScore {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    private SerializationHighScore() {
+        super();
+    }
+
+    public static @NotNull HighScore getInstance() {
+        if (highScoreSingleton == null) {
+            highScoreSingleton = new SerializationHighScore();
+        }
+        return highScoreSingleton;
     }
 
     @Override

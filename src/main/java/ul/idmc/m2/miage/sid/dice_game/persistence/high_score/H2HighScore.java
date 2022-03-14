@@ -1,5 +1,6 @@
 package ul.idmc.m2.miage.sid.dice_game.persistence.high_score;
 
+import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.Main;
 import java.io.IOException;
 import java.sql.DriverManager;
@@ -21,6 +22,17 @@ public class H2HighScore extends SQLHighScore {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    private H2HighScore() {
+        super();
+    }
+
+    public static @NotNull HighScore getInstance() {
+        if (highScoreSingleton == null) {
+            highScoreSingleton = new H2HighScore();
+        }
+        return highScoreSingleton;
     }
 
     @Override

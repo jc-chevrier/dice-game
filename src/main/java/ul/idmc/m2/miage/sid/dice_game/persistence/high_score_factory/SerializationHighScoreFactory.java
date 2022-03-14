@@ -7,6 +7,6 @@ import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.SerializationHighSc
 public class SerializationHighScoreFactory implements HighScoreFactory {
     @Override
     public @NotNull HighScore make() {
-        return new SerializationHighScore();
+        return SerializationHighScore.getInstance();
     }
 }

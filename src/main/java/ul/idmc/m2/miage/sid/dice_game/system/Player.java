@@ -62,6 +62,10 @@ public class Player {
         return name;
     }
 
+    public void setName(@NotNull String name) {
+        this.name = name;
+    }
+
     public @NotNull Integer getScore() {
         return score;
     }

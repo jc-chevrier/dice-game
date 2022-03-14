@@ -63,19 +63,31 @@ public class Play {
         return numberTurn == 10;
     }
 
-    public Player getPlayer() {
+    public @NotNull Player getPlayer() {
         return player;
     }
 
-    public Integer getNumberTurn() {
+    public @NotNull Integer getNumberTurn() {
         return numberTurn;
     }
 
-    public HighScore getHighScore() {
+    public @NotNull HighScore getHighScore() {
         return highScore;
     }
 
-    public PropertyChangeSupport getSupport() {
+    public @NotNull HighScoreFactory getHighScoreFactory() {
+        return highScoreFactory;
+    }
+
+    public void setHighScoreFactory(@NotNull HighScoreFactory highScoreFactory) {
+        this.highScoreFactory = highScoreFactory;
+        List<Score> scores = highScore.getScores();
+        highScore = highScoreFactory.make();
+        highScore.setScores(scores);
+        highScore.save();
+    }
+
+    public @NotNull PropertyChangeSupport getSupport() {
         return support;
     }
 }

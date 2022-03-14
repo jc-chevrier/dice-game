@@ -7,6 +7,6 @@ import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.PostgreSQLHighScore
 public class PostgreSQLHighScoreFactory implements HighScoreFactory {
     @Override
     public @NotNull HighScore make() {
-        return new PostgreSQLHighScore();
+        return PostgreSQLHighScore.getInstance();
     }
 }

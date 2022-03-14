@@ -7,6 +7,6 @@ import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.HighScore;
 public class H2HighScoreFactory implements HighScoreFactory {
     @Override
     public @NotNull HighScore make() {
-        return new H2HighScore();
+        return H2HighScore.getInstance();
     }
 }
