@@ -1,18 +1,17 @@
 package ul.idmc.m2.miage.sid.dice_game.vizualisation.play;
 
 import org.jetbrains.annotations.NotNull;
+import ul.idmc.m2.miage.sid.dice_game.principle.Observer;
 import ul.idmc.m2.miage.sid.dice_game.system.Dice;
 import ul.idmc.m2.miage.sid.dice_game.system.PlayEvent;
 import ul.idmc.m2.miage.sid.dice_game.system.Player;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.IconManager;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.Theme;
-
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-public class DiceView extends JPanel implements PropertyChangeListener, Theme {
+public class DiceView extends JPanel implements Observer, Theme {
     private @NotNull Player player;
     private @NotNull Dice dice;
     private PlayEvent playEvent;

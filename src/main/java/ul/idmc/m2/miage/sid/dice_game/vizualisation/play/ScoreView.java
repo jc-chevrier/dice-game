@@ -1,17 +1,16 @@
 package ul.idmc.m2.miage.sid.dice_game.vizualisation.play;
 
 import org.jetbrains.annotations.NotNull;
+import ul.idmc.m2.miage.sid.dice_game.principle.Observer;
 import ul.idmc.m2.miage.sid.dice_game.system.Play;
 import ul.idmc.m2.miage.sid.dice_game.system.PlayEvent;
 import ul.idmc.m2.miage.sid.dice_game.system.Player;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.Theme;
-
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-public class ScoreView extends JPanel implements PropertyChangeListener, Theme {
+public class ScoreView extends JPanel implements Observer, Theme {
     private @NotNull Play play;
     private @NotNull Player player;
     private PlayEvent playEvent;

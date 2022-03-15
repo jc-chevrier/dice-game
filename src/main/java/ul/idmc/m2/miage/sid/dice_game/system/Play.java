@@ -5,55 +5,57 @@ import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.HighScore;
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.Score;
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.HighScoreFactory;
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.PostgreSQLHighScoreFactory;
-import java.beans.PropertyChangeSupport;
+import ul.idmc.m2.miage.sid.dice_game.principle.Observable;
+import ul.idmc.m2.miage.sid.dice_game.principle.Reinitializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Play {
+public class Play extends Observable implements Reinitializable {
     private @NotNull Player player;
     private @NotNull Integer numberTurn;
     private @NotNull HighScoreFactory highScoreFactory;
     private @NotNull HighScore highScore;
-    private @NotNull PropertyChangeSupport support;
 
     public Play() {
-        reinitialize();
-        support = new PropertyChangeSupport(this);
-    }
+        super();
 
-    private void reinitialize() {
         numberTurn = 0;
 
-        if (highScoreFactory == null) {
-            highScoreFactory = new PostgreSQLHighScoreFactory();
-        }
+        highScoreFactory = new PostgreSQLHighScoreFactory();
 
         highScore = highScoreFactory.make();
         highScore.load();
 
-        if(player == null) {
-            if(highScore.getScores().isEmpty()) {
-                player = new Player();
-            } else {
-                List<Score> scores = highScore.getScores();
-                player = new Player(scores.get(scores.size() - 1).getPlayerName());
-            }
+        if(highScore.getScores().isEmpty()) {
+            player = new Player();
         } else {
-            player = new Player(player.getName());
+            List<Score> scores = highScore.getScores();
+            player = new Player(scores.get(scores.size() - 1).getPlayerName());
         }
+    }
+
+    @Override
+    public void reinitialize() {
+        numberTurn = 0;
+
+        player.reinitialize();
+    }
+
+    public void setUp() {
+        getSupport().firePropertyChange(PlayEvent.NEW_SETTINGS.name(), null, null);
     }
 
     public void start() {
         reinitialize();
-        support.firePropertyChange((player.getName().isEmpty() ? PlayEvent.NEW_USER : PlayEvent.NEW_PLAY).name(), null, null);
+        getSupport().firePropertyChange(PlayEvent.NEW_PLAY.name(), null, null);
     }
 
     public void end() {
-        if(ended()) {
+        if (ended()) {
             List<Score> oldScores = (ArrayList<Score>) ((ArrayList<Score>) highScore.getScores()).clone();
             highScore.addScore(player);
             highScore.save();
-            support.firePropertyChange(PlayEvent.END_PLAY.name(), oldScores, highScore.getScores());
+            getSupport().firePropertyChange(PlayEvent.END_PLAY.name(), oldScores, highScore.getScores());
         }
     }
 
@@ -61,16 +63,16 @@ public class Play {
         System.exit(0);
     }
 
-    public void incrementNumberTurn() {
-        if(!ended()) {
-            Integer oldNumberTurn = numberTurn.intValue();
-            numberTurn++;
-            support.firePropertyChange(PlayEvent.NEW_TURN.name(), oldNumberTurn, numberTurn);
-        }
-    }
-
     public boolean ended() {
         return numberTurn == 10;
+    }
+
+    public void incrementNumberTurn() {
+        if (!ended()) {
+            Integer oldNumberTurn = numberTurn;
+            numberTurn++;
+            getSupport().firePropertyChange(PlayEvent.NEW_TURN.name(), oldNumberTurn, numberTurn);
+        }
     }
 
     public @NotNull Player getPlayer() {
@@ -92,16 +94,21 @@ public class Play {
     public void setHighScoreFactory(@NotNull HighScoreFactory highScoreFactory) {
         this.highScoreFactory = highScoreFactory;
 
+        List<Score> oldScores = highScore.getScores();
         highScore = highScoreFactory.make();
         highScore.load();
 
         List<Score> scores = highScore.getScores();
-        if(player.getName().isEmpty() && !scores.isEmpty()) {
+        Boolean oldPlayerNameWasDerivedFromOldLoad = !oldScores.isEmpty() &&
+                                                      oldScores.get(oldScores.size() - 1)
+                                                               .getPlayerName()
+                                                               .equals(player.getName());
+        if(!scores.isEmpty() && (player.getName().isEmpty() || oldPlayerNameWasDerivedFromOldLoad)) {
             player = new Player(scores.get(scores.size() - 1).getPlayerName());
+        } else {
+            if(oldPlayerNameWasDerivedFromOldLoad) {
+                player = new Player();
+            }
         }
-    }
-
-    public @NotNull PropertyChangeSupport getSupport() {
-        return support;
     }
 }

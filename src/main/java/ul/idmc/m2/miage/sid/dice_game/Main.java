@@ -6,7 +6,7 @@ import ul.idmc.m2.miage.sid.dice_game.vizualisation.Window;
 public class Main {
     public static void main(String[] args) {
         Play play = new Play();
-        Window window = new Window(play);
-        play.start();
+        new Window(play);
+        play.setUp();
     }
 }

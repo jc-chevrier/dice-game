@@ -6,8 +6,6 @@ import ul.idmc.m2.miage.sid.dice_game.system.Play;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.Theme;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
@@ -15,12 +13,12 @@ import java.util.Arrays;
 public class SettingView extends JPanel implements Theme {
     protected @NotNull Play play;
     protected @NotNull JTextField playerNameInput;
-    protected @NotNull JComboBox<String> saveSupportComboBox;
+    protected @NotNull JComboBox<String> storageSpaceComboBox;
 
     public SettingView(@NotNull Play play) {
         this.play = play;
 
-        paintChildComponents();
+        paintContent();
 
         JPanel voidView = new JPanel();
         Integer childComponentsHeight = Arrays.asList(getComponents())
@@ -34,7 +32,7 @@ public class SettingView extends JPanel implements Theme {
         setPreferredSize(new Dimension(400, 375));
     }
 
-    protected void paintChildComponents()  {
+    protected void paintContent() {
         JLabel playerNameLabel = new JLabel("Nom de joueur", JLabel.CENTER);
         playerNameLabel.setFont(new Font(playerNameLabel.getFont().getName(), Font.BOLD, 13));
         playerNameLabel.setPreferredSize(new Dimension(150, 20));
@@ -58,20 +56,20 @@ public class SettingView extends JPanel implements Theme {
         voidView3.setPreferredSize(new Dimension(400, 15));
         add(voidView3);
 
-        JLabel labelSaveSupport = new JLabel("Espace de sauvegarde", JLabel.CENTER);
-        labelSaveSupport.setFont(new Font(labelSaveSupport.getFont().getName(), Font.BOLD, 13));
-        labelSaveSupport.setPreferredSize(new Dimension(400, 20));
-        add(labelSaveSupport);
+        JLabel labelStorageSpace = new JLabel("Espace de stockage", JLabel.CENTER);
+        labelStorageSpace.setFont(new Font(labelStorageSpace.getFont().getName(), Font.BOLD, 13));
+        labelStorageSpace.setPreferredSize(new Dimension(400, 20));
+        add(labelStorageSpace);
 
         JPanel voidView4 = new JPanel();
         voidView4.setPreferredSize(new Dimension(400, 1));
         add(voidView4);
 
         String[] options = {"PostgreSQL", "MySQL", "H2", "S\u00e9rialisation",};
-        saveSupportComboBox = new JComboBox<String>(options);
-        saveSupportComboBox.addItemListener((e) -> {
+        storageSpaceComboBox = new JComboBox<String>(options);
+        storageSpaceComboBox.addItemListener((e) -> {
             HighScoreFactory highScoreFactory = null;
-            switch (options[saveSupportComboBox.getSelectedIndex()]) {
+            switch (options[storageSpaceComboBox.getSelectedIndex()]) {
                 case "PostgreSQL" -> highScoreFactory = new PostgreSQLHighScoreFactory();
                 case "MySQL" -> highScoreFactory = new MySQLHighScoreFactory();
                 case "H2" -> highScoreFactory = new H2HighScoreFactory();
@@ -85,9 +83,9 @@ public class SettingView extends JPanel implements Theme {
                                     .getSimpleName()
                                     .replace("HighScoreFactory", "")
                                     .replace("Serialization", "S\u00e9rialisation");
-        saveSupportComboBox.setSelectedIndex(Arrays.asList(options).indexOf(selectedOption));
-        saveSupportComboBox.setPreferredSize(new Dimension(150, 25));
-        saveSupportComboBox.setBackground(Color.WHITE);
-        add(saveSupportComboBox);
+        storageSpaceComboBox.setSelectedIndex(Arrays.asList(options).indexOf(selectedOption));
+        storageSpaceComboBox.setPreferredSize(new Dimension(150, 25));
+        storageSpaceComboBox.setBackground(Color.WHITE);
+        add(storageSpaceComboBox);
     }
 }

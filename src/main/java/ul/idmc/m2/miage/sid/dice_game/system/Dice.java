@@ -1,15 +1,19 @@
 package ul.idmc.m2.miage.sid.dice_game.system;
 
-import org.jetbrains.annotations.NotNull;
-import java.beans.PropertyChangeSupport;
+import ul.idmc.m2.miage.sid.dice_game.principle.Observable;
+import ul.idmc.m2.miage.sid.dice_game.principle.Reinitializable;
 
-public class Dice {
-    private @NotNull Integer result;
-    private @NotNull PropertyChangeSupport support;
+public class Dice extends Observable implements Reinitializable {
+    private Integer result;
 
     public Dice() {
-        result = 0;
-        support = new PropertyChangeSupport(this);
+        super();
+        result = null;
+    }
+
+    @Override
+    public void reinitialize() {
+        result = null;
     }
 
     public void roll() {
@@ -17,14 +21,10 @@ public class Dice {
         do {
             result = ((Long) Math.round(Math.random() * 6)).intValue();
         } while (result == 0);
-        support.firePropertyChange(PlayEvent.DICE_ROLLED.name(), oldResult, result);
+        getSupport().firePropertyChange(PlayEvent.DICE_ROLLED.name(), oldResult, result);
     }
 
     public Integer getResult() {
         return result;
-    }
-
-    public PropertyChangeSupport getSupport() {
-        return support;
     }
 }

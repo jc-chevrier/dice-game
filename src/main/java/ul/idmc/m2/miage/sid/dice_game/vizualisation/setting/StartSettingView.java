@@ -13,8 +13,9 @@ public class StartSettingView extends SettingView {
         super(play);
     }
 
-    protected void paintChildComponents() {
-        super.paintChildComponents();
+    @Override
+    protected void paintContent() {
+        super.paintContent();
 
         JPanel voidView5 = new JPanel();
         voidView5.setPreferredSize(new Dimension(400, 15));
@@ -32,12 +33,11 @@ public class StartSettingView extends SettingView {
         startButton.setEnabled(!play.getPlayer().getName().isEmpty());
         add(startButton);
 
-
-        saveSupportComboBox.removeItemListener(saveSupportComboBox.getItemListeners()[0]);
+        storageSpaceComboBox.removeItemListener(storageSpaceComboBox.getItemListeners()[0]);
         String[] options = {"PostgreSQL", "MySQL", "H2", "S\u00e9rialisation",};
-        saveSupportComboBox.addItemListener((e) -> {
+        storageSpaceComboBox.addItemListener((e) -> {
             HighScoreFactory highScoreFactory = null;
-            switch (options[saveSupportComboBox.getSelectedIndex()]) {
+            switch (options[storageSpaceComboBox.getSelectedIndex()]) {
                 case "PostgreSQL" -> highScoreFactory = new PostgreSQLHighScoreFactory();
                 case "MySQL" -> highScoreFactory = new MySQLHighScoreFactory();
                 case "H2" -> highScoreFactory = new H2HighScoreFactory();

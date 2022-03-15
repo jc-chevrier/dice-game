@@ -1,18 +1,16 @@
 package ul.idmc.m2.miage.sid.dice_game.vizualisation;
 
 import org.jetbrains.annotations.NotNull;
+import ul.idmc.m2.miage.sid.dice_game.principle.Observer;
 import ul.idmc.m2.miage.sid.dice_game.system.Play;
 import ul.idmc.m2.miage.sid.dice_game.system.PlayEvent;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.play.PlayView;
-import ul.idmc.m2.miage.sid.dice_game.vizualisation.setting.SettingView;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.setting.StartSettingView;
-
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-public class Window extends JFrame implements PropertyChangeListener, Theme {
+public class Window extends JFrame implements Observer, Theme {
     private @NotNull Play play;
 
     public Window(@NotNull Play play) {
@@ -33,7 +31,7 @@ public class Window extends JFrame implements PropertyChangeListener, Theme {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         switch (PlayEvent.valueOf(evt.getPropertyName())) {
-            case NEW_USER -> {
+            case NEW_SETTINGS -> {
                 setContentPane(new StartSettingView(play));
                 repaint();
 
@@ -61,7 +59,7 @@ public class Window extends JFrame implements PropertyChangeListener, Theme {
             }
             case END_PLAY -> {
                 JOptionPane.showOptionDialog(this,
-                                             "Partie \u0074\u0065\u0072\u006d\u0069\u006e\u00e9\u0065 !\nVous avez obtenu ce score : " +
+                                             "Partie Termin\u00e9e !\nVous avez obtenu ce score : " +
                                              play.getPlayer().getScore() + " !",
                                              "Dice Game",
                                              JOptionPane.PLAIN_MESSAGE,
@@ -81,8 +79,6 @@ public class Window extends JFrame implements PropertyChangeListener, Theme {
                                                              "Oui");
                 if(option.equals(JOptionPane.YES_OPTION)) {
                     play.start();
-                } else {
-                    play.stop();
                 }
             }
         }

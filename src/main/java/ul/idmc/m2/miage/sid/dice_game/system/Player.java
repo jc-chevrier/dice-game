@@ -1,21 +1,24 @@
 package ul.idmc.m2.miage.sid.dice_game.system;
 
 import org.jetbrains.annotations.NotNull;
-import java.beans.PropertyChangeSupport;
+import ul.idmc.m2.miage.sid.dice_game.principle.Observable;
+import ul.idmc.m2.miage.sid.dice_game.principle.Reinitializable;
 
-public class Player {
+public class Player extends Observable implements Reinitializable {
     private @NotNull String name;
     private @NotNull Integer score;
     private @NotNull Dice dice1;
     private @NotNull Dice dice2;
-    private @NotNull PropertyChangeSupport support;
 
     public Player(@NotNull String name, @NotNull Integer score) {
+        super();
+
         this.name = name;
+
         this.score = score;
+
         dice1 = new Dice();
         dice2 = new Dice();
-        support = new PropertyChangeSupport(this);
     }
 
     public Player(@NotNull String name) {
@@ -26,8 +29,15 @@ public class Player {
         this("");
     }
 
+    @Override
+    public void reinitialize() {
+        score = 0;
+        dice1.reinitialize();
+        dice2.reinitialize();
+    }
+
     public void play() {
-        support.firePropertyChange(PlayEvent.NEW_TURN.name(), null, null);
+        getSupport().firePropertyChange(PlayEvent.NEW_TURN.name(), null, null);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {}
@@ -36,12 +46,12 @@ public class Player {
         dice1.roll();
         dice2.roll();
         reevaluateScore();
-        support.firePropertyChange(PlayEvent.NEW_SCORE.name(), oldScore.equals(score) ? null : oldScore, score);
+        getSupport().firePropertyChange(PlayEvent.NEW_SCORE.name(), oldScore.equals(score) ? null : oldScore, score);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {}
 
-        support.firePropertyChange(PlayEvent.END_TURN.name(), null, null);
+        getSupport().firePropertyChange(PlayEvent.END_TURN.name(), null, null);
     }
 
     public Integer getDicesSumResult() {
@@ -76,9 +86,5 @@ public class Player {
 
     public Dice getDice2() {
         return dice2;
-    }
-
-    public PropertyChangeSupport getSupport() {
-        return support;
     }
 }
