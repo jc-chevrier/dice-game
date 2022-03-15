@@ -56,7 +56,7 @@ public class ScoreView extends JPanel implements Observer, Theme {
         g.setFont(new Font(font.getFontName(), Font.BOLD, newTurn ? bigFontSize : normalFontSize));
         fontMetrics = g.getFontMetrics();
         stringX = (width - fontMetrics.stringWidth(string)) / 2;
-        g.drawString(string, stringX,70);
+        g.drawString(string, stringX, 70);
 
         string = "Score";
         g.setColor(Color.WHITE);

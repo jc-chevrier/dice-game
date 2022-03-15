@@ -34,7 +34,7 @@ public class TopBarView extends JMenuBar implements Theme {
         JMenuItem highScoresItem = new JMenuItem("Meilleurs scores");
         highScoresItem.addActionListener((e) -> {
             Window window = ((Window) SwingUtilities.getWindowAncestor(this));
-            window.setContentPane(new HighScoreView(play));
+            window.setContentPane(new HighScoreView(play.getHighScore()));
             window.repaint();
             window.pack();
             window.setVisible(true);

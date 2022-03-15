@@ -59,7 +59,7 @@ public class Window extends JFrame implements Observer, Theme {
             }
             case END_PLAY -> {
                 JOptionPane.showOptionDialog(this,
-                                             "Partie Termin\u00e9e !\nVous avez obtenu ce score : " +
+                                             "Partie termin\u00e9e !\nVous avez obtenu ce score : " +
                                              play.getPlayer().getScore() + " !",
                                              "Dice Game",
                                              JOptionPane.PLAIN_MESSAGE,
