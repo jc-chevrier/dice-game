@@ -5,7 +5,6 @@ import ul.idmc.m2.miage.sid.dice_game.principle.Observer;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice;
 import ul.idmc.m2.miage.sid.dice_game.system.PlayEvent;
 import ul.idmc.m2.miage.sid.dice_game.system.Player;
-import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice6Faces;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.IconManager;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.Theme;
 import javax.swing.*;
@@ -54,9 +53,14 @@ public class DiceView extends JPanel implements Observer, Theme {
             }
         }
 
-        Boolean isDice6Faces = dice.getClass().getSimpleName().equals(Dice6Faces.class.getSimpleName());
-        String diceFolder = isDice6Faces ? "dice_6_faces/" : "dice_10_faces/";
-        String imagePath = diceFolder;
+        String imageFolder = null;
+        switch (dice.getClass().getSimpleName()) {
+            case "Dice6Faces" -> imageFolder = "dice_6_faces";
+            case "Dice10Faces" -> imageFolder = "dice_10_faces";
+            case "Dice20Faces" -> imageFolder = "dice_20_faces";
+        }
+        imageFolder += "/";
+        String imagePath = imageFolder;
         switch (playEvent) {
             case NEW_TURN -> {
                 imagePath += "roll.png";

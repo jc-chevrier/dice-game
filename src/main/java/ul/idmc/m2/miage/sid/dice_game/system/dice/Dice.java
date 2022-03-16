@@ -29,7 +29,7 @@ public abstract class Dice extends Observable implements Reinitializable {
         getSupport().firePropertyChange(PlayEvent.DICE_ROLLED.name(), oldCurrentFace, currentFace);
     }
 
-    public List<Integer> getCurrentFaces() {
+    public List<Integer> getFaces() {
         return faces;
     }
 

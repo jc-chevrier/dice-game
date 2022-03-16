@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.*;
 import ul.idmc.m2.miage.sid.dice_game.system.Play;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice10Faces;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice20Faces;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice6Faces;
 import ul.idmc.m2.miage.sid.dice_game.system.rule.Rule;
 import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSameFaces;
@@ -147,13 +148,15 @@ public class SettingView extends JPanel implements Theme {
         add(voidView7);
 
         String[] typeDiceOptions = new String[]{"D\u00e9 \u00e0 6 faces (1-6)",
-                                         "D\u00e9 \u00e0 10 faces (0-9)"};
+                                                "D\u00e9 \u00e0 10 faces (0-9)",
+                                                "D\u00e9 \u00e0 20 faces (1-20)"};
         typeDiceComboBox = new JComboBox<String>(typeDiceOptions);
         typeDiceComboBox.addItemListener((e) -> {
             String typeDice = null;
             switch (typeDiceOptions[typeDiceComboBox.getSelectedIndex()]) {
                 case "D\u00e9 \u00e0 6 faces (1-6)" -> typeDice = Dice6Faces.class.getSimpleName();
                 case "D\u00e9 \u00e0 10 faces (0-9)" ->  typeDice = Dice10Faces.class.getSimpleName();
+                case "D\u00e9 \u00e0 20 faces (1-20)" ->  typeDice = Dice20Faces.class.getSimpleName();
             }
             play.setTypeDice(typeDice);
         });
@@ -161,6 +164,7 @@ public class SettingView extends JPanel implements Theme {
         switch (play.getTypeDice()) {
             case "Dice6Faces" -> typeDiceSelectedOption = 0;
             case "Dice10Faces" -> typeDiceSelectedOption = 1;
+            case "Dice20Faces" -> typeDiceSelectedOption = 2;
         }
         typeDiceComboBox.setSelectedIndex(typeDiceSelectedOption);
         typeDiceComboBox.setPreferredSize(new Dimension(150, 25));

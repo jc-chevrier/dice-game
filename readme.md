@@ -2,7 +2,16 @@
 Dice Game
 
 ### Description
-Jeu de dé en client lourd
+Jeu de dé en client lourd.
+Le joueur fait 10 lancers de 2 dés.
+Il peut paramétrer les règles, du jeu et les type des dés.
+
+![](./doc/dice_game_1.png)
+![](./doc/dice_game_2.png)
+![](./doc/dice_game_3.png)
+![](./doc/dice_game_4.png)
+![](./doc/dice_game_5.png)
+![](./doc/dice_game_6.png)
 
 ### Langages, librairies, frameworks
 - Java 17

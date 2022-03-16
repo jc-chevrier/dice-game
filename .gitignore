@@ -2,3 +2,4 @@
 .idea
 target
 dice-game.iml
+dependency-reduced-pom.xml

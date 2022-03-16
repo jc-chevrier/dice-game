@@ -5,6 +5,7 @@ import ul.idmc.m2.miage.sid.dice_game.principle.Observable;
 import ul.idmc.m2.miage.sid.dice_game.principle.Reinitializable;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice10Faces;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice20Faces;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice6Faces;
 
 public class Player extends Observable implements Reinitializable {
@@ -48,12 +49,19 @@ public class Player extends Observable implements Reinitializable {
             dice1.reinitialize();
             dice2.reinitialize();
         } else {
-            if (play.getTypeDice().equals(Dice6Faces.class.getSimpleName())) {
-                dice1 = new Dice6Faces();
-                dice2 = new Dice6Faces();
-            } else {
-                dice1 = new Dice10Faces();
-                dice2 = new Dice10Faces();
+            switch (play.getTypeDice()) {
+                case "Dice6Faces" -> {
+                    dice1 = new Dice6Faces();
+                    dice2 = new Dice6Faces();
+                }
+                case "Dice10Faces" -> {
+                    dice1 = new Dice10Faces();
+                    dice2 = new Dice10Faces();
+                }
+                case "Dice20Faces" -> {
+                    dice1 = new Dice20Faces();
+                    dice2 = new Dice20Faces();
+                }
             }
         }
     }
