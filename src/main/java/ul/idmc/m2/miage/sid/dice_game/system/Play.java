@@ -9,7 +9,8 @@ import ul.idmc.m2.miage.sid.dice_game.principle.Observable;
 import ul.idmc.m2.miage.sid.dice_game.principle.Reinitializable;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice6Faces;
 import ul.idmc.m2.miage.sid.dice_game.system.rule.Rule;
-import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSumResults7;
+import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSumFacesEquals7;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Play extends Observable implements Reinitializable {
     public Play() {
         super();
 
-        rule = new RuleSumResults7();
+        rule = new RuleSumFacesEquals7();
 
         typeDice = Dice6Faces.class.getSimpleName();
 

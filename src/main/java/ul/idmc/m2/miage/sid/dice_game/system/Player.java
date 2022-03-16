@@ -76,10 +76,6 @@ public class Player extends Observable implements Reinitializable {
         getSupport().firePropertyChange(PlayEvent.END_TURN.name(), null, null);
     }
 
-    public Integer getDicesSumResult() {
-        return dice1.getResult() + dice2.getResult();
-    }
-
     public Boolean wins() {
         return play.getRule().win(dice1, dice2);
     }

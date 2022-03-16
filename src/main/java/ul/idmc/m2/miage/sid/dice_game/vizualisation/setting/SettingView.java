@@ -3,13 +3,12 @@ package ul.idmc.m2.miage.sid.dice_game.vizualisation.setting;
 import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.*;
 import ul.idmc.m2.miage.sid.dice_game.system.Play;
-import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice10Faces;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice6Faces;
 import ul.idmc.m2.miage.sid.dice_game.system.rule.Rule;
-import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSameResults;
-import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSumResults7;
-import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSumResultsLowerThan7;
+import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSameFaces;
+import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSumFacesEquals7;
+import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSumFacesLowerThan7;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.Theme;
 import javax.swing.*;
 import java.awt.*;
@@ -117,17 +116,17 @@ public class SettingView extends JPanel implements Theme {
         ruleComboBox.addItemListener((e) -> {
             Rule rule = null;
             switch (ruleOptions[ruleComboBox.getSelectedIndex()]) {
-                case "Somme \u00e9gale \u00e0 7" -> rule = new RuleSumResults7();
-                case "Somme inf\u00e9rieure \u00e0 7" ->  rule = new RuleSumResultsLowerThan7();
-                case "M\u00eames faces" -> rule = new RuleSameResults();
+                case "Somme \u00e9gale \u00e0 7" -> rule = new RuleSumFacesEquals7();
+                case "Somme inf\u00e9rieure \u00e0 7" ->  rule = new RuleSumFacesLowerThan7();
+                case "M\u00eames faces" -> rule = new RuleSameFaces();
             }
             play.setRule(rule);
         });
         Integer ruleSelectedOption = null;
         switch (play.getRule().getClass().getSimpleName()) {
-            case "RuleSumResults7" -> ruleSelectedOption = 0;
-            case "RuleSumResultsLowerThan7" -> ruleSelectedOption = 1;
-            case "RuleSameResults" -> ruleSelectedOption = 2;
+            case "RuleSumFacesEquals7" -> ruleSelectedOption = 0;
+            case "RuleSumFacesLowerThan7" -> ruleSelectedOption = 1;
+            case "RuleSameFaces" -> ruleSelectedOption = 2;
         }
         ruleComboBox.setSelectedIndex(ruleSelectedOption);
         ruleComboBox.setPreferredSize(new Dimension(150, 25));

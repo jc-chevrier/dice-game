@@ -8,32 +8,32 @@ import java.util.List;
 
 public abstract class Dice extends Observable implements Reinitializable {
     protected @NotNull List<Integer> faces;
-    protected Integer result;
+    protected Integer face;
 
     public Dice(@NotNull List<Integer> faces) {
         super();
         this.faces = faces;
-        result = null;
+        face = null;
     }
 
     @Override
     public void reinitialize() {
-        result = null;
+        face = null;
     }
 
     public void roll() {
-        Integer oldResult = result;
+        Integer oldFace = face;
         do {
-            result = ((Long) Math.round(Math.random() * faces.get(faces.size() - 1))).intValue();
-        } while (!faces.contains(result));
-        getSupport().firePropertyChange(PlayEvent.DICE_ROLLED.name(), oldResult, result);
+            face = ((Long) Math.round(Math.random() * faces.get(faces.size() - 1))).intValue();
+        } while (!faces.contains(face));
+        getSupport().firePropertyChange(PlayEvent.DICE_ROLLED.name(), oldFace, face);
     }
 
     public List<Integer> getFaces() {
         return faces;
     }
 
-    public Integer getResult() {
-        return result;
+    public Integer getFace() {
+        return face;
     }
 }
