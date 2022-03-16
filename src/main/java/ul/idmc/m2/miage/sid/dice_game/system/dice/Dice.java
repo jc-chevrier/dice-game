@@ -10,7 +10,7 @@ public abstract class Dice extends Observable implements Reinitializable {
     protected @NotNull List<Integer> faces;
     protected Integer currentFace;
 
-    public Dice(@NotNull List<Integer> currentFaces) {
+    public Dice(@NotNull List<Integer> faces) {
         super();
         this.faces = faces;
         currentFace = null;
