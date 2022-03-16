@@ -38,9 +38,9 @@ public class SettingView extends JPanel implements Theme {
         playerNameLabel.setPreferredSize(new Dimension(150, 20));
         add(playerNameLabel);
 
-        JPanel voidView2 = new JPanel();
-        voidView2.setPreferredSize(new Dimension(400, 1));
-        add(voidView2);
+        JPanel voidView = new JPanel();
+        voidView.setPreferredSize(new Dimension(400, 1));
+        add(voidView);
 
         playerNameInput = new JTextField(play.getPlayer().getName());
         playerNameInput.addKeyListener(new KeyAdapter() {
@@ -52,18 +52,18 @@ public class SettingView extends JPanel implements Theme {
         playerNameInput.setPreferredSize(new Dimension(150, 25));
         add(playerNameInput);
 
-        JPanel voidView3 = new JPanel();
-        voidView3.setPreferredSize(new Dimension(400, 15));
-        add(voidView3);
+        JPanel voidView2 = new JPanel();
+        voidView2.setPreferredSize(new Dimension(400, 15));
+        add(voidView2);
 
         JLabel labelStorageSpace = new JLabel("Espace de stockage", JLabel.CENTER);
         labelStorageSpace.setFont(new Font(labelStorageSpace.getFont().getName(), Font.BOLD, 13));
         labelStorageSpace.setPreferredSize(new Dimension(400, 20));
         add(labelStorageSpace);
 
-        JPanel voidView4 = new JPanel();
-        voidView4.setPreferredSize(new Dimension(400, 1));
-        add(voidView4);
+        JPanel voidView3 = new JPanel();
+        voidView3.setPreferredSize(new Dimension(400, 1));
+        add(voidView3);
 
         String[] options = {"PostgreSQL", "MySQL", "H2", "S\u00e9rialisation",};
         storageSpaceComboBox = new JComboBox<String>(options);

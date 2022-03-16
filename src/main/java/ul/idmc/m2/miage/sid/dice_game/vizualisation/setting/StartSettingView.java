@@ -17,9 +17,9 @@ public class StartSettingView extends SettingView {
     protected void paintContent() {
         super.paintContent();
 
-        JPanel voidView5 = new JPanel();
-        voidView5.setPreferredSize(new Dimension(400, 15));
-        add(voidView5);
+        JPanel voidView = new JPanel();
+        voidView.setPreferredSize(new Dimension(400, 15));
+        add(voidView);
 
         JButton startButton = new JButton("Jouer");
         startButton.addActionListener((e) -> play.start());
