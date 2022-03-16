@@ -1,7 +1,7 @@
 package ul.idmc.m2.miage.sid.dice_game.system.rule;
 
 import org.jetbrains.annotations.NotNull;
-import ul.idmc.m2.miage.sid.dice_game.system.Dice;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice;
 
 public class RuleSameResults implements Rule {
     @Override

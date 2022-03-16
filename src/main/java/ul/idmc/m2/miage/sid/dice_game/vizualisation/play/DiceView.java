@@ -2,9 +2,10 @@ package ul.idmc.m2.miage.sid.dice_game.vizualisation.play;
 
 import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.principle.Observer;
-import ul.idmc.m2.miage.sid.dice_game.system.Dice;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice;
 import ul.idmc.m2.miage.sid.dice_game.system.PlayEvent;
 import ul.idmc.m2.miage.sid.dice_game.system.Player;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice6Faces;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.IconManager;
 import ul.idmc.m2.miage.sid.dice_game.vizualisation.Theme;
 import javax.swing.*;
@@ -53,16 +54,18 @@ public class DiceView extends JPanel implements Observer, Theme {
             }
         }
 
-        String imagePath = null;
+        Boolean isDice6Faces = dice.getClass().getSimpleName().equals(Dice6Faces.class.getSimpleName());
+        String diceFolder = isDice6Faces ? "dice_6_faces/" : "dice_10_faces/";
+        String imagePath = diceFolder;
         switch (playEvent) {
             case NEW_TURN -> {
-                imagePath = "dices_roll.png";
+                imagePath += "roll.png";
             }
             case END_TURN -> {
-                imagePath = "dice_2.png";
+                imagePath += "base.png";
             }
             case DICE_ROLLED, NEW_SCORE -> {
-                imagePath = "dice_face_" + dice.getResult() + ".png";
+                imagePath += "face_" + dice.getResult() + ".png";
             }
         }
         Image image = IconManager.getInstance().get(imagePath);

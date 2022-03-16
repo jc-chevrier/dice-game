@@ -3,6 +3,9 @@ package ul.idmc.m2.miage.sid.dice_game.system;
 import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.principle.Observable;
 import ul.idmc.m2.miage.sid.dice_game.principle.Reinitializable;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice10Faces;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice6Faces;
 
 public class Player extends Observable implements Reinitializable {
     private @NotNull Play play;
@@ -20,8 +23,13 @@ public class Player extends Observable implements Reinitializable {
 
         this.score = score;
 
-        dice1 = new Dice();
-        dice2 = new Dice();
+        if (play.getTypeDice().equals(Dice6Faces.class.getSimpleName())) {
+            dice1 = new Dice6Faces();
+            dice2 = new Dice6Faces();
+        } else {
+            dice1 = new Dice10Faces();
+            dice2 = new Dice10Faces();
+        }
     }
 
     public Player(@NotNull Play play, @NotNull String name) {
@@ -35,8 +43,19 @@ public class Player extends Observable implements Reinitializable {
     @Override
     public void reinitialize() {
         score = 0;
-        dice1.reinitialize();
-        dice2.reinitialize();
+
+        if (play.getTypeDice().equals(dice1.getClass().getSimpleName())) {
+            dice1.reinitialize();
+            dice2.reinitialize();
+        } else {
+            if (play.getTypeDice().equals(Dice6Faces.class.getSimpleName())) {
+                dice1 = new Dice6Faces();
+                dice2 = new Dice6Faces();
+            } else {
+                dice1 = new Dice10Faces();
+                dice2 = new Dice10Faces();
+            }
+        }
     }
 
     public void play() {

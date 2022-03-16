@@ -7,14 +7,15 @@ import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.HighScoreFa
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.PostgreSQLHighScoreFactory;
 import ul.idmc.m2.miage.sid.dice_game.principle.Observable;
 import ul.idmc.m2.miage.sid.dice_game.principle.Reinitializable;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice6Faces;
 import ul.idmc.m2.miage.sid.dice_game.system.rule.Rule;
 import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSumResults7;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Play extends Observable implements Reinitializable {
     private @NotNull Rule rule;
+    private @NotNull String typeDice;
     private @NotNull Player player;
     private @NotNull Integer numberTurn;
     private @NotNull HighScoreFactory highScoreFactory;
@@ -24,6 +25,8 @@ public class Play extends Observable implements Reinitializable {
         super();
 
         rule = new RuleSumResults7();
+
+        typeDice = Dice6Faces.class.getSimpleName();
 
         numberTurn = 0;
 
@@ -83,6 +86,15 @@ public class Play extends Observable implements Reinitializable {
 
     public @NotNull Rule getRule() {
         return rule;
+    }
+
+    public @NotNull String getTypeDice() {
+        return typeDice;
+    }
+
+    public void setTypeDice(@NotNull String typeDice) {
+        this.typeDice = typeDice;
+        player.reinitialize();
     }
 
     public void setRule(@NotNull Rule rule) {

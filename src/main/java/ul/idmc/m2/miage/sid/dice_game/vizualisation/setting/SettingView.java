@@ -3,6 +3,9 @@ package ul.idmc.m2.miage.sid.dice_game.vizualisation.setting;
 import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.*;
 import ul.idmc.m2.miage.sid.dice_game.system.Play;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice10Faces;
+import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice6Faces;
 import ul.idmc.m2.miage.sid.dice_game.system.rule.Rule;
 import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSameResults;
 import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSumResults7;
@@ -19,6 +22,7 @@ public class SettingView extends JPanel implements Theme {
     protected @NotNull JTextField playerNameInput;
     protected @NotNull JComboBox<String> storageSpaceComboBox;
     protected @NotNull JComboBox<String> ruleComboBox;
+    protected @NotNull JComboBox<String> typeDiceComboBox;
 
     public SettingView(@NotNull Play play) {
         this.play = play;
@@ -31,7 +35,7 @@ public class SettingView extends JPanel implements Theme {
                                               .map(component -> (int) component.getPreferredSize().getHeight())
                                               .reduce((height, acc) -> acc + height)
                                               .get();
-        voidView.setPreferredSize(new Dimension(400, (375 - childComponentsHeight - 85) / 2));
+        voidView.setPreferredSize(new Dimension(400, (375 - childComponentsHeight - 100) / 2));
         add(voidView, 0);
 
         setPreferredSize(new Dimension(400, 375));
@@ -58,7 +62,7 @@ public class SettingView extends JPanel implements Theme {
         add(playerNameInput);
 
         JPanel voidView2 = new JPanel();
-        voidView2.setPreferredSize(new Dimension(400, 15));
+        voidView2.setPreferredSize(new Dimension(400, 5));
         add(voidView2);
 
         JLabel labelStorageSpace = new JLabel("Espace de stockage", JLabel.CENTER);
@@ -70,11 +74,11 @@ public class SettingView extends JPanel implements Theme {
         voidView3.setPreferredSize(new Dimension(400, 1));
         add(voidView3);
 
-         String[] options = new String[]{"PostgreSQL", "MySQL", "H2", "S\u00e9rialisation"};
-        storageSpaceComboBox = new JComboBox<String>(options);
+        String[] storageSpaceOptions = new String[]{"PostgreSQL", "MySQL", "H2", "S\u00e9rialisation"};
+        storageSpaceComboBox = new JComboBox<String>(storageSpaceOptions);
         storageSpaceComboBox.addItemListener((e) -> {
             HighScoreFactory highScoreFactory = null;
-            switch (options[storageSpaceComboBox.getSelectedIndex()]) {
+            switch (storageSpaceOptions[storageSpaceComboBox.getSelectedIndex()]) {
                 case "PostgreSQL" -> highScoreFactory = new PostgreSQLHighScoreFactory();
                 case "MySQL" -> highScoreFactory = new MySQLHighScoreFactory();
                 case "H2" -> highScoreFactory = new H2HighScoreFactory();
@@ -83,21 +87,21 @@ public class SettingView extends JPanel implements Theme {
             play.setHighScoreFactory(highScoreFactory);
             playerNameInput.setText(play.getPlayer().getName());
         });
-        String selectedOption = play.getHighScoreFactory()
+        String storageSpaceSelectedOption = play.getHighScoreFactory()
                                     .getClass()
                                     .getSimpleName()
                                     .replace("HighScoreFactory", "")
                                     .replace("Serialization", "S\u00e9rialisation");
-        storageSpaceComboBox.setSelectedIndex(Arrays.asList(options).indexOf(selectedOption));
+        storageSpaceComboBox.setSelectedIndex(Arrays.asList(storageSpaceOptions).indexOf(storageSpaceSelectedOption));
         storageSpaceComboBox.setPreferredSize(new Dimension(150, 25));
         storageSpaceComboBox.setBackground(Color.WHITE);
         add(storageSpaceComboBox);
 
         JPanel voidView4 = new JPanel();
-        voidView4.setPreferredSize(new Dimension(400, 15));
+        voidView4.setPreferredSize(new Dimension(400, 5));
         add(voidView4);
 
-        JLabel labelRule = new JLabel("Règle pour gagner", JLabel.CENTER);
+        JLabel labelRule = new JLabel("R\u00e8gle pour gagner", JLabel.CENTER);
         labelRule.setFont(new Font(labelRule.getFont().getName(), Font.BOLD, 13));
         labelRule.setPreferredSize(new Dimension(400, 20));
         add(labelRule);
@@ -106,28 +110,62 @@ public class SettingView extends JPanel implements Theme {
         voidView5.setPreferredSize(new Dimension(400, 1));
         add(voidView5);
 
-        final String[] options2 = new String[]{"Somme \u00e9gale \u00e0 7",
-                                               "Somme inf\u00e9rieure \u00e0 7",
-                                               "M\u00eames faces"};
-        ruleComboBox = new JComboBox<String>(options2);
+        String[] ruleOptions = new String[]{"Somme \u00e9gale \u00e0 7",
+                                          "Somme inf\u00e9rieure \u00e0 7",
+                                          "M\u00eames faces"};
+        ruleComboBox = new JComboBox<String>(ruleOptions);
         ruleComboBox.addItemListener((e) -> {
             Rule rule = null;
-            switch (options2[ruleComboBox.getSelectedIndex()]) {
+            switch (ruleOptions[ruleComboBox.getSelectedIndex()]) {
                 case "Somme \u00e9gale \u00e0 7" -> rule = new RuleSumResults7();
                 case "Somme inf\u00e9rieure \u00e0 7" ->  rule = new RuleSumResultsLowerThan7();
                 case "M\u00eames faces" -> rule = new RuleSameResults();
             }
             play.setRule(rule);
         });
-        Integer selectedOption2 = null;
+        Integer ruleSelectedOption = null;
         switch (play.getRule().getClass().getSimpleName()) {
-            case "RuleSumResults7" -> selectedOption2 = 0;
-            case "RuleSumResultsLowerThan7" -> selectedOption2 = 1;
-            case "RuleSameResults" -> selectedOption2 = 2;
+            case "RuleSumResults7" -> ruleSelectedOption = 0;
+            case "RuleSumResultsLowerThan7" -> ruleSelectedOption = 1;
+            case "RuleSameResults" -> ruleSelectedOption = 2;
         }
-        ruleComboBox.setSelectedIndex(selectedOption2);
+        ruleComboBox.setSelectedIndex(ruleSelectedOption);
         ruleComboBox.setPreferredSize(new Dimension(150, 25));
         ruleComboBox.setBackground(Color.WHITE);
         add(ruleComboBox);
+
+        JPanel voidView6 = new JPanel();
+        voidView6.setPreferredSize(new Dimension(400, 5));
+        add(voidView6);
+
+        JLabel labelTypeDice = new JLabel("Type de d\u00e9", JLabel.CENTER);
+        labelTypeDice.setFont(new Font(labelTypeDice.getFont().getName(), Font.BOLD, 13));
+        labelTypeDice.setPreferredSize(new Dimension(400, 20));
+        add(labelTypeDice);
+
+        JPanel voidView7 = new JPanel();
+        voidView7.setPreferredSize(new Dimension(400, 1));
+        add(voidView7);
+
+        String[] typeDiceOptions = new String[]{"D\u00e9 \u00e0 6 faces (1-6)",
+                                         "D\u00e9 \u00e0 10 faces (0-9)"};
+        typeDiceComboBox = new JComboBox<String>(typeDiceOptions);
+        typeDiceComboBox.addItemListener((e) -> {
+            String typeDice = null;
+            switch (typeDiceOptions[typeDiceComboBox.getSelectedIndex()]) {
+                case "D\u00e9 \u00e0 6 faces (1-6)" -> typeDice = Dice6Faces.class.getSimpleName();
+                case "D\u00e9 \u00e0 10 faces (0-9)" ->  typeDice = Dice10Faces.class.getSimpleName();
+            }
+            play.setTypeDice(typeDice);
+        });
+        Integer typeDiceSelectedOption = null;
+        switch (play.getTypeDice()) {
+            case "Dice6Faces" -> typeDiceSelectedOption = 0;
+            case "Dice10Faces" -> typeDiceSelectedOption = 1;
+        }
+        typeDiceComboBox.setSelectedIndex(typeDiceSelectedOption);
+        typeDiceComboBox.setPreferredSize(new Dimension(150, 25));
+        typeDiceComboBox.setBackground(Color.WHITE);
+        add(typeDiceComboBox);
     }
 }
