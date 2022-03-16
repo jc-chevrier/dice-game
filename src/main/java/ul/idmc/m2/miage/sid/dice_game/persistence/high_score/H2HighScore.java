@@ -10,8 +10,8 @@ import java.sql.Timestamp;
 import java.util.Properties;
 
 public class H2HighScore extends SQLHighScore {
-    private final static String CONFIGURATION_FILENAME = "configuration/h2.properties";
-    private static Properties CONFIGURATION;
+    private final static @NotNull String CONFIGURATION_FILENAME = "configuration/h2.properties";
+    private static @NotNull Properties CONFIGURATION;
     private static @NotNull H2HighScore highScoreSingleton;
 
     static {

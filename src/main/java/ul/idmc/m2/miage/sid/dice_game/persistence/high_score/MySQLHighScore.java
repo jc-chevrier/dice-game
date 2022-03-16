@@ -7,8 +7,8 @@ import java.sql.*;
 import java.util.Properties;
 
 public class MySQLHighScore extends SQLHighScore {
-    private final static String CONFIGURATION_FILENAME = "configuration/mysql.properties";
-    private static Properties CONFIGURATION;
+    private final static @NotNull String CONFIGURATION_FILENAME = "configuration/mysql.properties";
+    private static @NotNull Properties CONFIGURATION;
     private static @NotNull MySQLHighScore highScoreSingleton;
 
     static {

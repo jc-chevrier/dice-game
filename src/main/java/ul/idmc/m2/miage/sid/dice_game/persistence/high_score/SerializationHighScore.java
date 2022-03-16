@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Properties;
 
 public class SerializationHighScore extends HighScore {
-    private final static String CONFIGURATION_FILENAME = "configuration/serialization.properties";
-    private static Properties CONFIGURATION;
+    private final static @NotNull String CONFIGURATION_FILENAME = "configuration/serialization.properties";
+    private static @NotNull Properties CONFIGURATION;
     private static @NotNull SerializationHighScore highScoreSingleton;
 
     static {
