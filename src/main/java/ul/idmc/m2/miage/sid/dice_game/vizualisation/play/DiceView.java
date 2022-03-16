@@ -65,7 +65,7 @@ public class DiceView extends JPanel implements Observer, Theme {
                 imagePath += "base.png";
             }
             case DICE_ROLLED, NEW_SCORE -> {
-                imagePath += "face_" + dice.getFace() + ".png";
+                imagePath += "face_" + dice.getCurrentFace() + ".png";
             }
         }
         Image image = IconManager.getInstance().get(imagePath);
