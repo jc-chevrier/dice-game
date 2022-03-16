@@ -7,10 +7,14 @@ import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.HighScoreFa
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.PostgreSQLHighScoreFactory;
 import ul.idmc.m2.miage.sid.dice_game.principle.Observable;
 import ul.idmc.m2.miage.sid.dice_game.principle.Reinitializable;
+import ul.idmc.m2.miage.sid.dice_game.system.rule.Rule;
+import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSumResults7;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Play extends Observable implements Reinitializable {
+    private @NotNull Rule rule;
     private @NotNull Player player;
     private @NotNull Integer numberTurn;
     private @NotNull HighScoreFactory highScoreFactory;
@@ -18,6 +22,8 @@ public class Play extends Observable implements Reinitializable {
 
     public Play() {
         super();
+
+        rule = new RuleSumResults7();
 
         numberTurn = 0;
 
@@ -27,10 +33,10 @@ public class Play extends Observable implements Reinitializable {
         highScore.load();
 
         if(highScore.getScores().isEmpty()) {
-            player = new Player();
+            player = new Player(this);
         } else {
             List<Score> scores = highScore.getScores();
-            player = new Player(scores.get(scores.size() - 1).getPlayerName());
+            player = new Player(this, scores.get(scores.size() - 1).getPlayerName());
         }
     }
 
@@ -75,6 +81,14 @@ public class Play extends Observable implements Reinitializable {
         }
     }
 
+    public @NotNull Rule getRule() {
+        return rule;
+    }
+
+    public void setRule(@NotNull Rule rule) {
+        this.rule = rule;
+    }
+
     public @NotNull Player getPlayer() {
         return player;
     }
@@ -104,10 +118,10 @@ public class Play extends Observable implements Reinitializable {
                                                                .getPlayerName()
                                                                .equals(player.getName());
         if(!scores.isEmpty() && (player.getName().isEmpty() || oldPlayerNameWasDerivedFromOldLoad)) {
-            player = new Player(scores.get(scores.size() - 1).getPlayerName());
+            player = new Player(this, scores.get(scores.size() - 1).getPlayerName());
         } else {
             if(oldPlayerNameWasDerivedFromOldLoad) {
-                player = new Player();
+                player = new Player(this);
             }
         }
     }

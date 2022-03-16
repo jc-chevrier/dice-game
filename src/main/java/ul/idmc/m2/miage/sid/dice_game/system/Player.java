@@ -5,13 +5,16 @@ import ul.idmc.m2.miage.sid.dice_game.principle.Observable;
 import ul.idmc.m2.miage.sid.dice_game.principle.Reinitializable;
 
 public class Player extends Observable implements Reinitializable {
+    private @NotNull Play play;
     private @NotNull String name;
     private @NotNull Integer score;
     private @NotNull Dice dice1;
     private @NotNull Dice dice2;
 
-    public Player(@NotNull String name, @NotNull Integer score) {
+    public Player(@NotNull Play play, @NotNull String name, @NotNull Integer score) {
         super();
+
+        this.play = play;
 
         this.name = name;
 
@@ -21,12 +24,12 @@ public class Player extends Observable implements Reinitializable {
         dice2 = new Dice();
     }
 
-    public Player(@NotNull String name) {
-        this(name, 0);
+    public Player(@NotNull Play play, @NotNull String name) {
+        this(play, name, 0);
     }
 
-    public Player() {
-        this("");
+    public Player(@NotNull Play play) {
+        this(play, "");
     }
 
     @Override
@@ -59,7 +62,7 @@ public class Player extends Observable implements Reinitializable {
     }
 
     public Boolean wins() {
-        return getDicesSumResult()  == 7;
+        return play.getRule().win(dice1, dice2);
     }
 
     private void reevaluateScore() {
