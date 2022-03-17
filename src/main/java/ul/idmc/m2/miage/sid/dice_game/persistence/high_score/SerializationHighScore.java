@@ -3,6 +3,7 @@ package ul.idmc.m2.miage.sid.dice_game.persistence.high_score;
 import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.Main;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
@@ -36,15 +37,19 @@ public class SerializationHighScore extends HighScore {
 
     @Override
     public void load() {
-        try {
-            ObjectInputStream ois  = new ObjectInputStream(new FileInputStream(CONFIGURATION.getProperty("dataFilename")));
-            scores = (List<Score>) ois.readObject();
-            Collections.sort(scores, (score1, score2) -> score1.getDate().compareTo(score2.getDate()));
-            ois.close();
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Erreur ! Problème au cours de la sérialisation !");
-            e.printStackTrace();
-            System.exit(1);
+        if(new File(CONFIGURATION.getProperty("dataFilename")).exists()) {
+            try {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(CONFIGURATION.getProperty("dataFilename")));
+                scores = (List<Score>) ois.readObject();
+                Collections.sort(scores, (score1, score2) -> score1.getDate().compareTo(score2.getDate()));
+                ois.close();
+            } catch (IOException | ClassNotFoundException e) {
+                System.err.println("Erreur ! Problème au cours de la sérialisation !");
+                e.printStackTrace();
+                System.exit(1);
+            }
+        } else {
+            scores = new ArrayList<Score>();
         }
     }
 

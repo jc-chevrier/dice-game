@@ -35,10 +35,6 @@ public abstract class HighScore implements Serializable {
         return scores;
     }
 
-    public void setScores(@NotNull List<Score> scores) {
-        this.scores = scores;
-    }
-
     @Override
     public String toString() {
         return "HighScore{" +

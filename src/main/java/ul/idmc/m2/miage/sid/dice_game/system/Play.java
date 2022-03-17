@@ -10,7 +10,6 @@ import ul.idmc.m2.miage.sid.dice_game.principle.Reinitializable;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice6Faces;
 import ul.idmc.m2.miage.sid.dice_game.system.rule.Rule;
 import ul.idmc.m2.miage.sid.dice_game.system.rule.RuleSumFacesEquals7;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +88,10 @@ public class Play extends Observable implements Reinitializable {
         return rule;
     }
 
+    public void setRule(@NotNull Rule rule) {
+        this.rule = rule;
+    }
+
     public @NotNull String getTypeDice() {
         return typeDice;
     }
@@ -98,20 +101,12 @@ public class Play extends Observable implements Reinitializable {
         player.reinitialize();
     }
 
-    public void setRule(@NotNull Rule rule) {
-        this.rule = rule;
-    }
-
     public @NotNull Player getPlayer() {
         return player;
     }
 
     public @NotNull Integer getNumberTurn() {
         return numberTurn;
-    }
-
-    public @NotNull HighScore getHighScore() {
-        return highScore;
     }
 
     public @NotNull HighScoreFactory getHighScoreFactory() {
@@ -137,5 +132,9 @@ public class Play extends Observable implements Reinitializable {
                 player = new Player(this);
             }
         }
+    }
+
+    public @NotNull HighScore getHighScore() {
+        return highScore;
     }
 }

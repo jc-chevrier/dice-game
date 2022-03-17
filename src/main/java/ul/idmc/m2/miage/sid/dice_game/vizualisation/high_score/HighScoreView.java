@@ -19,7 +19,7 @@ public class HighScoreView extends JPanel implements Theme {
         List<Score> scores = (ArrayList<Score>) ((ArrayList<Score>) highScore.getScores()).clone();
         if(!scores.isEmpty()) {
             Collections.sort(scores, (score1, score2) -> score2.getScore().compareTo(score1.getScore()));
-            scores = scores.subList(0, scores.size() > 10 ? 9 : scores.size());
+            scores = scores.subList(0, scores.size() > 10 ? 10 : scores.size());
         }
 
         for (int i = 0; i < scores.size(); i++) {

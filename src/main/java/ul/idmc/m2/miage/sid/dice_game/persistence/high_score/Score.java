@@ -29,10 +29,6 @@ public class Score implements Serializable {
         this(new Date(), player.getName(), score);
     }
 
-    public void increment(@NotNull Integer score) {
-        this.score += score;
-    }
-
     public @NotNull Boolean isFor(@NotNull String playerName) {
         return this.playerName.equals(playerName);
     }
