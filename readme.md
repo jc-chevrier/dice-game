@@ -32,12 +32,11 @@ Le joueur peut :
 1. Démarrer vos serveurs de base de données PostgreSQL, H2, MySQL,
 et déclarer pour chaque une base de données "dice_game", et une table Score dedans,
 dont le code de déclaration est présent à ce chemin pour chaque base de données : 
-`src/main/java/ul/idmc/m2/miage/sid/dice_game/initialization/`.
+`src/main/sql/ul/idmc/m2/miage/sid/dice_game/initialization/`.
 2. Dans `src/main/resources/ul/idmc/m2/miage/sid/dice_game/configuration/`,
-déclarer la configuration de chaque espace de stockage, dont parmi les 3 base de 
+déclarer la configuration de chaque espace de stockage, dont parmi les 3 bases de 
 données.
 3. Compiler et exécuter le jeu
-
 
      mvn package && java -jar .\target\dice-game-1.0-SNAPSHOT.jar
 
