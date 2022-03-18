@@ -40,7 +40,8 @@ données.
    Pour faire cela, rendez-vous dans le répertoire home du projet sur un terminal, et exécuter ceci :
 
 
-     mvn package && java -jar .\target\dice-game-1.0-SNAPSHOT.jar
+
+      mvn package && java -jar .\target\dice-game-1.0-SNAPSHOT.jar
 
 ### Images du jeu
 
