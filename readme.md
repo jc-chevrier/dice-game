@@ -29,14 +29,15 @@ Le joueur peut :
 - CHEVRIER Jean-Christophe
 
 ### Installation et exécution
-1. Démarrer vos serveurs de base de données PostgreSQL, MySQL, H2,
-et déclarer pour chaque une base de données avec le nom que vous préférez (exemple: `dice_game`), 
+1. Démarrez vos serveurs de base de données PostgreSQL, MySQL, H2,
+et déclarez pour chaque une base de données avec le nom que vous préférez (exemple: `dice_game`), 
 et une table `Score` dedans, dont le code de déclaration est présent à ce chemin pour chaque base de données : 
 `src/main/sql/ul/idmc/m2/miage/sid/dice_game/initialization/`.
 2. Dans `src/main/resources/ul/idmc/m2/miage/sid/dice_game/configuration/`,
-déclarer la configuration de chaque espace de stockage, dont parmi les 3 bases de 
+déclarez la configuration de chaque espace de stockage, dont parmi les 3 bases de 
 données.
-3. Compiler et exécuter le jeu :
+3. Compilez et exécutez le jeu.
+   Pour faire cela, rendez-vous dans le répertoire home du projet sur un terminal, et exécuter ceci :
 
 
      mvn package && java -jar .\target\dice-game-1.0-SNAPSHOT.jar
