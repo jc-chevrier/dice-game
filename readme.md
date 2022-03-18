@@ -16,20 +16,20 @@ Le joueur peut :
 - paramétrer son nom, son espace de stockage, les règles du jeu, et les types des dés.
 
 ### Langages, librairies, frameworks
-- Java 17
-- Maven
-- Java AWT
-- Java Swing
-- PostgreSQL
-- MySQL
-- H2
+- `Java 17`
+- `Maven`
+- `Java AWT`
+- `Java Swing`
+- `PostgreSQL`
+- `MySQL`
+- `H2`
 
 ### Auteurs
 - ARNOULD Maxime
 - CHEVRIER Jean-Christophe
 
 ### Installation et exécution
-1. Démarrez vos serveurs de base de données PostgreSQL, MySQL, H2,
+1. Démarrez vos serveurs de base de données `PostgreSQL`, `MySQL`, `H2`,
 et déclarez pour chaque une base de données avec le nom que vous préférez (exemple: `dice_game`), 
 et une table `Score` dedans, dont le code de déclaration est présent à ce chemin pour chaque base de données : 
 `src/main/sql/ul/idmc/m2/miage/sid/dice_game/initialization/`.
