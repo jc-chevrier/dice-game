@@ -41,7 +41,7 @@ données.
 
 
 
-      mvn package && java -jar .\target\dice-game-1.0-SNAPSHOT.jar
+mvn package && java -jar .\target\dice-game-1.0-SNAPSHOT.jar
 
 ### Images du jeu
 
