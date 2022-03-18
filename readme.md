@@ -39,7 +39,6 @@ données.
 3. Compilez et exécutez le jeu. Pour faire cela, rendez-vous dans le répertoire home du projet sur un terminal, et exécuter ceci :
 <br>
 
-
       mvn package && java -jar .\target\dice-game-1.0-SNAPSHOT.jar
 
 ### Images du jeu
