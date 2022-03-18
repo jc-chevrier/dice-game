@@ -1,7 +1,7 @@
 package ul.idmc.m2.miage.sid.dice_game;
 
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.HighScore;
-import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.*;
+import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_kit.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,8 +10,8 @@ import java.util.Properties;
 public class HighScoreTest {
     public static void main(String[] args) {
         System.out.println("PostgreSQL - Test");
-        HighScoreFactory highScoreFactory = new PostgreSQLHighScoreFactory();
-        HighScore highScore = highScoreFactory.make();
+        HighScoreKit highScoreKit = new PostgreSQLHighScoreKit();
+        HighScore highScore = highScoreKit.make();
         highScore.load();
         System.out.println("First load");
         highScore.getScores().stream().forEach(System.out::println);
@@ -23,8 +23,8 @@ public class HighScoreTest {
         highScore.getScores().stream().forEach(System.out::println);
 
         System.out.println("\nMySQL - Test");
-        HighScoreFactory highScoreFactory2 = new MySQLHighScoreFactory();
-        HighScore highScore2 = highScoreFactory2.make();
+        HighScoreKit highScoreKit2 = new MySQLHighScoreKit();
+        HighScore highScore2 = highScoreKit2.make();
         highScore2.load();
         System.out.println("First load");
         highScore2.getScores().stream().forEach(System.out::println);
@@ -36,8 +36,8 @@ public class HighScoreTest {
         highScore2.getScores().stream().forEach(System.out::println);
 
         System.out.println("\nH2 - Test");
-        HighScoreFactory highScoreFactory3 = new H2HighScoreFactory();
-        HighScore highScore3 = highScoreFactory3.make();
+        HighScoreKit highScoreKit3 = new H2HighScoreKit();
+        HighScore highScore3 = highScoreKit3.make();
         highScore3.load();
         System.out.println("First load");
         highScore3.getScores().stream().forEach(System.out::println);
@@ -49,8 +49,8 @@ public class HighScoreTest {
         highScore3.getScores().stream().forEach(System.out::println);
 
         System.out.println("\nSerialization - Test");
-        HighScoreFactory highScoreFactory4 = new SerializationHighScoreFactory();
-        HighScore highScore4 = highScoreFactory4.make();
+        HighScoreKit highScoreKit4 = new SerializationHighScoreKit();
+        HighScore highScore4 = highScoreKit4.make();
         Properties configuration = new Properties();
         try {
             configuration.load(HighScoreTest.class.getResourceAsStream("./configuration/serialization.properties"));

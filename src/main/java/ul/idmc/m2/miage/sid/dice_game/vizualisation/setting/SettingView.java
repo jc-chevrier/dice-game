@@ -1,7 +1,7 @@
 package ul.idmc.m2.miage.sid.dice_game.vizualisation.setting;
 
 import org.jetbrains.annotations.NotNull;
-import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.*;
+import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_kit.*;
 import ul.idmc.m2.miage.sid.dice_game.system.Play;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice10Faces;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice20Faces;
@@ -77,20 +77,20 @@ public class SettingView extends JPanel implements Theme {
         String[] storageSpaceOptions = new String[]{"PostgreSQL", "MySQL", "H2", "S\u00e9rialisation"};
         storageSpaceComboBox = new JComboBox<String>(storageSpaceOptions);
         storageSpaceComboBox.addItemListener((e) -> {
-            HighScoreFactory highScoreFactory = null;
+            HighScoreKit highScoreKit = null;
             switch (storageSpaceOptions[storageSpaceComboBox.getSelectedIndex()]) {
-                case "PostgreSQL" -> highScoreFactory = new PostgreSQLHighScoreFactory();
-                case "MySQL" -> highScoreFactory = new MySQLHighScoreFactory();
-                case "H2" -> highScoreFactory = new H2HighScoreFactory();
-                case "S\u00e9rialisation" -> highScoreFactory = new SerializationHighScoreFactory();
+                case "PostgreSQL" -> highScoreKit = new PostgreSQLHighScoreKit();
+                case "MySQL" -> highScoreKit = new MySQLHighScoreKit();
+                case "H2" -> highScoreKit = new H2HighScoreKit();
+                case "S\u00e9rialisation" -> highScoreKit = new SerializationHighScoreKit();
             }
-            play.setHighScoreFactory(highScoreFactory);
+            play.setHighScoreKit(highScoreKit);
             playerNameInput.setText(play.getPlayer().getName());
         });
-        String storageSpaceSelectedOption = play.getHighScoreFactory()
+        String storageSpaceSelectedOption = play.getHighScoreKit()
                                     .getClass()
                                     .getSimpleName()
-                                    .replace("HighScoreFactory", "")
+                                    .replace("HighScoreKit", "")
                                     .replace("Serialization", "S\u00e9rialisation");
         storageSpaceComboBox.setSelectedIndex(Arrays.asList(storageSpaceOptions).indexOf(storageSpaceSelectedOption));
         storageSpaceComboBox.setPreferredSize(new Dimension(150, 25));

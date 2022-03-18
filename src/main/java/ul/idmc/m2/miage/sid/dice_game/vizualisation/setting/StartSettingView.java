@@ -1,7 +1,7 @@
 package ul.idmc.m2.miage.sid.dice_game.vizualisation.setting;
 
 import org.jetbrains.annotations.NotNull;
-import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.*;
+import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_kit.*;
 import ul.idmc.m2.miage.sid.dice_game.system.Play;
 import javax.swing.*;
 import java.awt.*;
@@ -36,14 +36,14 @@ public class StartSettingView extends SettingView {
         storageSpaceComboBox.removeItemListener(storageSpaceComboBox.getItemListeners()[0]);
         String[] options = {"PostgreSQL", "MySQL", "H2", "S\u00e9rialisation",};
         storageSpaceComboBox.addItemListener((e) -> {
-            HighScoreFactory highScoreFactory = null;
+            HighScoreKit highScoreKit = null;
             switch (options[storageSpaceComboBox.getSelectedIndex()]) {
-                case "PostgreSQL" -> highScoreFactory = new PostgreSQLHighScoreFactory();
-                case "MySQL" -> highScoreFactory = new MySQLHighScoreFactory();
-                case "H2" -> highScoreFactory = new H2HighScoreFactory();
-                case "S\u00e9rialisation" -> highScoreFactory = new SerializationHighScoreFactory();
+                case "PostgreSQL" -> highScoreKit = new PostgreSQLHighScoreKit();
+                case "MySQL" -> highScoreKit = new MySQLHighScoreKit();
+                case "H2" -> highScoreKit = new H2HighScoreKit();
+                case "S\u00e9rialisation" -> highScoreKit = new SerializationHighScoreKit();
             }
-            play.setHighScoreFactory(highScoreFactory);
+            play.setHighScoreKit(highScoreKit);
             playerNameInput.setText(play.getPlayer().getName());
             if (!play.getPlayer().getName().isEmpty()) {
                 startButton.setEnabled(true);

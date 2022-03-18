@@ -3,8 +3,8 @@ package ul.idmc.m2.miage.sid.dice_game.system;
 import org.jetbrains.annotations.NotNull;
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.HighScore;
 import ul.idmc.m2.miage.sid.dice_game.persistence.high_score.Score;
-import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.HighScoreFactory;
-import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_factory.PostgreSQLHighScoreFactory;
+import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_kit.HighScoreKit;
+import ul.idmc.m2.miage.sid.dice_game.persistence.high_score_kit.PostgreSQLHighScoreKit;
 import ul.idmc.m2.miage.sid.dice_game.principle.Observable;
 import ul.idmc.m2.miage.sid.dice_game.principle.Reinitializable;
 import ul.idmc.m2.miage.sid.dice_game.system.dice.Dice6Faces;
@@ -18,7 +18,7 @@ public class Play extends Observable implements Reinitializable {
     private @NotNull String typeDice;
     private @NotNull Player player;
     private @NotNull Integer numberTurn;
-    private @NotNull HighScoreFactory highScoreFactory;
+    private @NotNull HighScoreKit highScoreKit;
     private @NotNull HighScore highScore;
 
     public Play() {
@@ -30,9 +30,9 @@ public class Play extends Observable implements Reinitializable {
 
         numberTurn = 0;
 
-        highScoreFactory = new PostgreSQLHighScoreFactory();
+        highScoreKit = new PostgreSQLHighScoreKit();
 
-        highScore = highScoreFactory.make();
+        highScore = highScoreKit.make();
         highScore.load();
 
         if(highScore.getScores().isEmpty()) {
@@ -109,15 +109,15 @@ public class Play extends Observable implements Reinitializable {
         return numberTurn;
     }
 
-    public @NotNull HighScoreFactory getHighScoreFactory() {
-        return highScoreFactory;
+    public @NotNull HighScoreKit getHighScoreKit() {
+        return highScoreKit;
     }
 
-    public void setHighScoreFactory(@NotNull HighScoreFactory highScoreFactory) {
-        this.highScoreFactory = highScoreFactory;
+    public void setHighScoreKit(@NotNull HighScoreKit highScoreKit) {
+        this.highScoreKit = highScoreKit;
 
         List<Score> oldScores = highScore.getScores();
-        highScore = highScoreFactory.make();
+        highScore = highScoreKit.make();
         highScore.load();
 
         List<Score> scores = highScore.getScores();
