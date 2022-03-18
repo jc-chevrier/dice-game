@@ -36,7 +36,7 @@ et une table `Score` dedans, dont le code de déclaration est présent à ce che
 2. Dans `src/main/resources/ul/idmc/m2/miage/sid/dice_game/configuration/`,
 déclarer la configuration de chaque espace de stockage, dont parmi les 3 bases de 
 données.
-3. Compiler et exécuter le jeu
+3. Compiler et exécuter le jeu :
 
 
      mvn package && java -jar .\target\dice-game-1.0-SNAPSHOT.jar
