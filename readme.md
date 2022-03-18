@@ -37,9 +37,7 @@ et une table `Score` dedans, dont le code de déclaration est présent à ce che
 déclarez dans les fichiers présents la configuration de chaque espace de stockage, dont parmi les 3 bases de 
 données.
 3. Compilez et exécutez le jeu. Pour faire cela, rendez-vous dans le répertoire home du projet sur un terminal, et exécuter ceci :
-
 <br>
-
       mvn package && java -jar .\target\dice-game-1.0-SNAPSHOT.jar
 
 ### Images du jeu
